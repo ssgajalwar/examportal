@@ -10,7 +10,7 @@ env/
 /your_project_name/settings_local.py
 
 # Ignore database files
-db.sqlite3
+# db.sqlite3
 
 # Ignore static files collected by Django
 /staticfiles/
