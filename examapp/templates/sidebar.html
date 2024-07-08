@@ -1,0 +1,53 @@
+<div class="sidebar">
+    <a class="home" data-id="home" href="/">Home</a>
+    <a class="news" data-id="news" href="/tech_news">News</a>
+    <a class="dashboard" data-id="dashboard" href="/dashboard">Dashboard</a>
+    <a class="courses" data-id="courses" href="/courses">Courses</a>
+    <a class="profile" data-id="profile" href="/profile">Profile</a>
+    <a href="#">Settings</a>
+</div>
+<style>
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            background-color: #fff;
+            padding-top: 20px;
+            color: #4b0082;
+        }
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #575757;
+            display: block;
+            border-right: 5px solid transparent;
+            transition: all 0.5s;
+            font-weight: 500;
+        }
+        .sidebar a.active{
+            border-right: 5px solid #4b0082;
+            color: #4b0082;
+            font-weight: 600;
+        }
+        .sidebar a:hover {
+            border-right: 5px solid #4b0082;
+            color: #4b0082;
+            font-weight: 600;
+            /* background-color: #575757; */
+        }
+        .content {
+            margin-top: 15px;
+            margin-left: 260px;
+            padding: 20px;
+            background-color: #fff;
+        }
+</style>
+<script>
+    $("a").on('click',function(){
+        $("a").removeClass('active')
+        localStorage.setItem("active_class",$(this).attr("data-id"))
+        $(`.${localStorage.getItem("active_class")}`).addClass('active')
+    })
+    $(`.${localStorage.getItem("active_class")}`).addClass('active')
+</script>

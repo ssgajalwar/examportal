@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #4b0082;
+        }
+ 
+
+        .card {
+            width: 300px;
+            height: 300px;
+            box-shadow: 1px 3px 20px 4px rgba(0, 0, 0, 0.2);
+            border: none;
+            border-radius: 25px;
+            margin: 20px;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 10px;
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .card-text {
+            font-size: 18px;
+        }
+    </style>
+
+
+    {% include 'sidebar.html' %}
+    <div class="content px-3">
+        <h3 class="text-left theme-heading mx-4">Available Exams</h3>
+        <div class="row">
+            {% for exam in exams %}
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ exam.title }}</h5>
+                        <p class="card-text">Test your knowledge in {{ exam.title }}</p>
+                        <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

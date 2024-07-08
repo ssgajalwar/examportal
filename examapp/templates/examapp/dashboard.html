@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+
+{%block content %}
+    {% include 'sidebar.html'%}
+    <style>
+    .card{
+        box-shadow: 1px 3px 20px 4px rgba(0, 0, 0, 0.2);
+        border: none;
+        border-radius: 25px;
+    }
+    </style>
+    <div class="content">
+        <div>
+            <h3 class="text-left theme-heading mx-4 mb-4">Exam Performance Dashboard</h3>
+            <!-- Chart Container -->
+            <div id="chart"></div>
+        </div>
+        <div>
+            <h3 class="text-left theme-heading mx-4 my-4">Watched Videos</h3>
+            <div class="container">
+                <div class="row">
+                    {% for watched_video in watched_videos %}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ watched_video.video.title }}</h5>
+                                    <p class="card-text">{{ watched_video.video.description }}</p>
+                                    <a href="{{ watched_video.video.url }}" target="_blank" class="btn btn-theme">Watch Again</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch chart data from Django view
+            var chartData = JSON.parse('{{ chart_data|safe }}');  // Parse JSON data
+            
+            // Prepare ApexCharts configuration
+            var options = {
+                chart: {
+                    type: 'bar',  // Specify the chart type
+                    //height: 250,  // Set the chart height (optional)
+                    width:400,
+                },
+                series: [{
+                    name: 'Exam Scores',
+                    data: chartData.exam_scores,
+                }],
+                xaxis: {
+                    categories: chartData.exam_titles,
+                },
+                colors: ['#7c51fe'] ,
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        endingShape: 'rounded',
+                    }
+                },
+            };
+
+            // Render ApexCharts
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+        });
+    </script>
+
+{%endblock %}

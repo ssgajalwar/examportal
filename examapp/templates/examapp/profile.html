@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'sidebar.html'%}
+    <style>
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .profile-info div {
+            flex: 1;
+        }
+        .edit-btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+
+    <div class="content">
+        <h2>Profile</h2>
+        <div class="profile-info">
+            <div id="profile-text">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <!-- Add other profile fields as needed -->
+            </div>
+            <div id="profile-form" style="display: none;">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+            <div class="edit-btn">
+                <button id="edit-btn" class="btn btn-secondary">Edit</button>
+            </div>
+        </div>
+        <h3 class="mt-5">Exam Attempts</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Exam</th>
+                    <th>Score</th>
+                    <th>Attempts</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_exam in user_exams %}
+                <tr>
+                    <td>{{ user_exam.exam.title }}</td>
+                    <td>{{ user_exam.score }}</td>
+                    <td>{{ user_exam.attempts }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('edit-btn').addEventListener('click', function() {
+            var profileText = document.getElementById('profile-text');
+            var profileForm = document.getElementById('profile-form');
+            var editBtn = document.getElementById('edit-btn');
+            
+            if (profileForm.style.display === 'none') {
+                profileText.style.display = 'none';
+                profileForm.style.display = 'block';
+                editBtn.innerText = 'Cancel';
+                editBtn.classList.remove('btn-secondary');
+                editBtn.classList.add('btn-danger');
+            } else {
+                profileText.style.display = 'block';
+                profileForm.style.display = 'none';
+                editBtn.innerText = 'Edit';
+                editBtn.classList.remove('btn-danger');
+                editBtn.classList.add('btn-secondary');
+            }
+        });
+    </script>
+{% endblock %}

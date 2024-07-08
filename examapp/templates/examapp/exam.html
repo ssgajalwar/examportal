@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #4b0082;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question-container {
+            display: none;
+        }
+        .question-container.active {
+            display: block;
+        }
+        .custom-radio {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #ccc;
+            border-radius: 50%;
+        }
+        .custom-radio:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+        .custom-radio input:checked ~ .checkmark {
+            background-color: #4CAF50;
+        }
+        .custom-radio .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .custom-radio input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .custom-radio .checkmark:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+        .custom-radio input:checked ~ .label-text {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-right: 5px solid #4CAF50;
+        }
+        .label-text {
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            width: 90%;
+            display: flex;
+        }
+        .submit-btn, .next-btn, .prev-btn {
+            display: none;
+            /* margin: 20px 10px;
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+        }
+        .next-btn, .prev-btn {
+            display: inline-block;
+        }
+        .question-box {
+            position: fixed;
+            top: 20%;
+            right: 20px;
+            width: 245px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .question-box .question-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        .question-box .question-number.attempted {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-3 ">
+        <div class="row">
+            <div class="col-9 bg-white p-3">
+                <div class="d-flex justify-content-end">
+                    <h6 class="theme-text  bold-700">{{ examname }}</h6>
+                </div>
+                <form action="{% url 'result' exam_id %}" method="post">
+                    {% csrf_token %}
+                    {% for q in questions %}
+                        <div class="question-container" id="question-{{ forloop.counter }}">
+                            <h6 class="text-three bold-700">Question {{forloop.counter}}</h6>
+                            <p class="theme-header bold-700">{{ q.question_title }}</p>
+                            <ol class="list-unstyled">
+                                <li>
+                                    <label class="custom-radio">
+                                        <input type="radio" class="inp-{{forloop.counter}}" name="choice-{{ q.id }}" value="1">
+                                        <span class="checkmark"></span>
+                                        <span class="label-text">{{ q.option1 }}</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">
+                                        <input type="radio"class="inp-{{forloop.counter}}" name="choice-{{ q.id }}" value="2">
+                                        <span class="checkmark"></span>
+                                        <span class="label-text">{{ q.option2 }}</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">
+                                        <input type="radio" class="inp-{{forloop.counter}}" name="choice-{{ q.id }}" value="3">
+                                        <span class="checkmark"></span>
+                                        <span class="label-text">{{ q.option3 }}</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="custom-radio">
+                                        <input type="radio" class="inp-{{forloop.counter}}" name="choice-{{ q.id }}" value="4">
+                                        <span class="checkmark"></span>
+                                        <span class="label-text">{{ q.option4 }}</span>
+                                    </label>
+                                </li>
+                            </ol>
+                        </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="button" class="prev-btn btn-theme mx-2">Previous</button>
+                        <button type="button" class="next-btn btn-theme mx-2">Next</button>
+                        <input type="submit" value="Submit" class="submit-btn mx-2 btn-theme bg-success">
+                    </div>
+                </form>
+            </div>
+            <div class="col-3">
+                <div class="question-box">
+                    {% for i in questions %}
+                        <div class="question-number" id="qn-{{ forloop.counter }}">{{ forloop.counter }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            $(".search-form").hide()
+            $(".login-btn").hide()
+            $("#btn-premium").hide()
+
+            let currentQuestion = 1;
+            const totalQuestions = parseInt("{{ questions|length }}");
+
+            function showQuestion(index) {
+                $(".question-container").removeClass("active");
+                $("#question-" + index).addClass("active");
+            }
+
+            function updateButtons() {
+                if (currentQuestion === 1) {
+                    $(".prev-btn").hide();
+                } else {
+                    $(".prev-btn").show();
+                }
+
+                if (currentQuestion === totalQuestions) {
+                    $(".next-btn").hide();
+                    $(".submit-btn").show();
+                } else {
+                    $(".next-btn").show();
+                    // $(".submit-btn").hide();
+                }
+            }
+
+            function markAttempted(questionIndex) {
+                $(`#qn-${questionIndex}`).addClass('attempted');
+            }
+
+            $(".next-btn").click(function() {
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                    updateButtons();
+                }
+            });
+
+            $(".prev-btn").click(function() {
+                if (currentQuestion > 1) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                    updateButtons();
+                }
+            });
+
+            $(".question-number").click(function() {
+                currentQuestion = parseInt($(this).text());
+                showQuestion(currentQuestion);
+                updateButtons();
+            });
+
+            $("input[type='radio']").change(function() {
+                const questionId = $(this).attr("class").split('-')[1];
+                markAttempted(questionId);
+            });
+
+            showQuestion(currentQuestion);
+            updateButtons();
+        });
+    </script>
+{% endblock %}

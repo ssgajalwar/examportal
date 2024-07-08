@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Verification</title>
+</head>
+<body>
+    <h2>OTP Verification</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Verify OTP</button>
+    </form>
+</body>
+</html>

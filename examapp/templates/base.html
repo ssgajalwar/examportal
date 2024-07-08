@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Exam GEEK{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"> -->
+    <!-- Custom CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Optional: JavaScript for Bootstrap -->
+    <!-- <script src="payment.js"></script>  -->
+    <script async
+      src="https://pay.google.com/gp/p/js/pay.js"
+      onload="onGooglePayLoaded()"></script>
+    {% include 'payment.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <!-- {% include 'aos.html' %} -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script> -->
+    <!-- <script>
+        AOS.init();
+    </script> -->
+    <style>
+        /* Add your custom CSS here */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e1e1e1; 
+        }
+        .btn-theme{
+            background: #7c51fe;
+            border-radius: 25px;
+            padding: 7px 30px;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            color: white;
+            
+        }
+        .btn-theme-secondary:hover,
+        .btn-theme:hover{
+            color: #ffffff;
+        }
+        .btn-theme-secondary{
+            background: #00e4e3;
+            border-radius: 25px;
+            padding: 7px 30px;
+            border: none;
+            outline: none;
+            text-decoration: none;
+            color: white;
+        }
+        .btn-theme-secondary:hover{
+            text-decoration: none;
+            border: none;
+        }
+        .btn-theme:focus,
+        .btn-theme-secondary:focus{
+            outline: none;
+            border: none;
+        }
+        .theme-heading{
+            color: #333333;
+        }
+        .theme-text{
+            color: #7c51fe;
+        }
+        .theme-text-secondary{
+            color: #00e4e3;
+        }
+        .bold-700{
+            font-weight: 700;
+        }
+        .text-three{
+            color: #cccccc ;
+        }
+        .base-navbar {
+            background-color: #ffffff;
+            position: fixed;
+            width: 100%;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        .base-navbar-brand {
+            color: #fff; /* Secondary color */
+        }
+        .base-form-control {
+            border-radius: 20px; /* Rounded border for search input */
+        }
+        .base-search-icon {
+            color: #808080; /* Medium opacity text */
+        }
+        .base-user-profile {
+            color: #fff; /* Secondary color */
+        }
+        .base-content {
+            padding: 70px 20px 20px 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark base-navbar">
+        <div class="px-3 d-flex justify-content-between w-100">
+            <!-- Logo / Brand -->
+            <a class="navbar-brand base-navbar-brand" href="/">
+                <h2 class="theme-text  bold-700">Exam <span class="theme-text-secondary">GEEK</span></h2>
+            </a>
+            
+            <!-- Search Form -->
+            <form class="form-inline search-form my-2 my-lg-0 mx-auto" action="{% url 'home'%}" method="post">
+                {% csrf_token %}
+                <input class="form-control base-form-control mr-sm-2 px-4" type="search" name="query" placeholder="Search" aria-label="Search">
+                <input type="submit" value="Search" style="font-size: 14px;" class=" btn-theme mx-2">
+            </form>
+            
+            <!-- User Profile and Login/Logout Button -->
+            <div class="navbar-text ml-auto">
+                <!-- <span class="base-user-profile mr-3">{{ user.username }}</span> User profile name -->
+                <button type="button" id="btn-premium" class="btn-theme btn-sm" data-toggle="modal" data-target="#myModal">
+                    Get Premium
+                </button>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn login-btn btn-theme btn-sm">Logout</a> <!-- Logout button -->
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn login-btn btn-theme btn-sm">Login</a> <!-- Login button -->
+                {% endif %}
+               
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Content Block -->
+    <div class="base-content">
+        <div class="px-3">
+            {% block content %}
+                
+            {% endblock %}
+        </div>
+    </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Pay Using GPay</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body d-flex justify-content-center align-items-center py-3">
+                    <div id="container"></div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
