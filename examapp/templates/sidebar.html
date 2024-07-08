@@ -4,7 +4,8 @@
     <a class="dashboard" data-id="dashboard" href="/dashboard">Dashboard</a>
     <a class="courses" data-id="courses" href="/courses">Courses</a>
     <a class="profile" data-id="profile" href="/profile">Profile</a>
-    <a href="#">Settings</a>
+    <a class="roadmaps" data-id="roadmaps" href="/roadmaps">Roadmaps</a>
+    <a class="settings" data-id="settings" href="/settings">Settings</a>
 </div>
 <style>
         .sidebar {
@@ -46,8 +47,12 @@
 <script>
     $("a").on('click',function(){
         $("a").removeClass('active')
-        localStorage.setItem("active_class",$(this).attr("data-id"))
-        $(`.${localStorage.getItem("active_class")}`).addClass('active')
+        sessionStorage.setItem("active_class",$(this).attr("data-id"))
+        $(`.${sessionStorage.getItem("active_class")}`).addClass('active')
     })
-    $(`.${localStorage.getItem("active_class")}`).addClass('active')
+    if(sessionStorage.getItem("active_class") == null || sessionStorage.getItem("active_class") == ""){
+        $(".home").addClass('active')
+    }else{
+        $(`.${sessionStorage.getItem("active_class")}`).addClass('active')
+    }
 </script>

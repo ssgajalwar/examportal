@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'sidebar.html'%}
+    <div class="content">
+        <div class="container ">
+            <h2 class="text-center mb-4">{{ profile }} Skills</h2>
+            <ul class="list-group">
+                {% for skill in skills %}
+                <li class="list-group-item">{{ skill }}</li>
+                {% endfor %}
+            </ul>
+            <div class="mt-3">
+                <a href="{% url 'roadmaps' %}" class="btn btn-theme-secondary">All Roadmaps</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

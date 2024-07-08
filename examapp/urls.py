@@ -18,4 +18,7 @@ urlpatterns = [
     path('password-reset/', views.password_reset_request, name='password_reset'),
     path('otp-verification/', views.otp_verification, name='otp_verification'),
     path('set-new-password/', views.set_new_password, name='set_new_password'),
+    path('settings/',views.settings,name='settings'),
+    path('roadmaps/',views.roadmaps,name='roadmaps'),
+    path('roadmaps/<str:profile>/', views.roadmap_detail, name='roadmap_detail'),
 ]

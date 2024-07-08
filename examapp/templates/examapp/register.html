@@ -12,10 +12,27 @@
         body{
             background: white !important;
         }
+        form p{
+        display: flex;
+        /* gap: 20px; */
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    form p label{
+        width: 30%;
+    }
+    form p input,
+    form p textarea{
+        width: 70%;
+    }        
+        
+        
+        
     </style>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 ">
                 <h2 class="text-left theme-heading ">Register</h2>
                 <form method="post">
                     {% csrf_token %}
@@ -27,7 +44,7 @@
                 </form>
             </div>
             <div class="col-6 d-flex justify-content-center">
-                <img width="550px" src="https://img.freepik.com/premium-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=2000" alt="Login page vector">
+                <img width="550px" style="max-height: 366px;" src="https://img.freepik.com/premium-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=2000" alt="Login page vector">
             </div>
         </div>
 
