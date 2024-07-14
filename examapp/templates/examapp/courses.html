@@ -33,7 +33,7 @@
                             <a href="{{ video.url }}"  target="_blank" data-url="{{ video.url }}" class="btn video-url btn-theme">Watch</a>
                             <form action="{% url 'mark_as_watched' video.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-theme-secondary">Mark Watched</button>
+                                <button type="submit" class="btn btn-theme-secondary"> Watched</button>
                             </form>
                         </div>
                         </div>

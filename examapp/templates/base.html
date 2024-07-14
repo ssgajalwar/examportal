@@ -112,7 +112,33 @@
         .base-content {
             padding: 70px 20px 20px 20px;
         }
-        
+        .mobilenav-btn{
+            font-size: 30px;
+            color: #7c51fe;
+            display: none;
+        }
+        .mobile-none{
+            display: flex;
+        }
+        @media (max-width: 767.98px) {
+            .mobilenav-btn{
+                display: block;
+            }
+            .base-content .content{
+                padding: 20px 5px;
+            }
+            .mobile-none{
+                display: none;
+            }
+            .question-box{
+                display: none;
+            }
+            .search-form,
+            .navbar-text{
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -132,7 +158,7 @@
             </form>
             
             <!-- User Profile and Login/Logout Button -->
-            <div class="navbar-text">
+            <div class="navbar-text mobile-none">
                 <!-- <span class="base-user-profile mr-3">{{ user.username }}</span> User profile name -->
                 <button type="button" id="btn-premium" class="btn-theme btn-sm" data-toggle="modal" data-target="#myModal">
                     Get Premium
@@ -145,13 +171,15 @@
                
 
             </div>
-
+            <div class="mobilenav-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
     </nav>
 
     <!-- Content Block -->
     <div class="base-content">
-        <div class="px-3">
+        <div class="md-px-3 sm-px-0">
             {% block content %}
                 
             {% endblock %}
@@ -176,6 +204,10 @@
             </div>
         </div>
     </div>
-
+    <script>
+        $(".mobilenav-btn").on("click",function(){
+            $(".sidebar").toggleClass("show-sidebar")
+        })
+    </script>
 </body>
 </html>
