@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 {% block content %}
     <style>
         body {
@@ -12,23 +13,61 @@
             height: 300px;
             box-shadow: 1px 3px 20px 4px rgba(0, 0, 0, 0.2);
             border: none;
-            border-radius: 25px;
-            margin: 20px;
+            border-radius: 30px;
+            margin: 5px 0px;
         }
         .card-body {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            /* align-items: center; */
+            justify-content: space-between;
             background-color: white;
-            border-radius: 10px;
+            border-radius: 30px;
+            padding: 10px;
         }
         .card-title {
             font-size: 24px;
             font-weight: bold;
         }
         .card-text {
-            font-size: 18px;
+            font-size: 14px;
+            color: #777;
+        }
+        .purple-title{
+            background: #7c51fe;
+            color: #fff;
+            width: 100%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 25px;
+        }
+        .purple-title i{
+            font-size: 55px;
+        }
+        .card-content{
+            height: 40%;
+            padding: 15px 5px 0px 5px;
+        }
+        .bookmark{
+            display: flex;
+            height: 40px;
+            width: 40px;
+            font-size: 22px;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 106, 213, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(9.9px);
+            -webkit-backdrop-filter: blur(9.9px);
+            border: 1px solid rgba(255, 106, 215, 0.21);
+            border-radius: 50%;
+            cursor: pointer;
+            color: #fe51b6;
         }
     </style>
 
@@ -38,12 +77,23 @@
         <h3 class="text-left theme-heading mx-4">Available Exams</h3>
         <div class="row">
             {% for exam in exams %}
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card">
+            <div class="col-md-3 d-flex justify-content-center">
+                <div class="card ">
                     <div class="card-body">
-                        <h5 class="card-title">{{ exam.title }}</h5>
-                        <p class="card-text">Test your knowledge in {{ exam.title }}</p>
-                        <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
+                        <div class="purple-title">
+                            <i data-icon="{{ exam.title|removespaces|lower}}" class="exam-icon "></i>
+                            <h5 class="card-title">{{ exam.title }}</h5>
+                        </div>
+                        <div class="card-content d-flex flex-column justify-content-between">
+                            <div>
+                                <h6 class="card-text bold-700 my-0">100 Marks</h6>
+                                <p class="card-text my-0">Test your knowledge in {{ exam.title }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
+                                <span class="bookmark"><i class="fa-solid fa-heart"></i></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,4 +101,20 @@
         </div>
     </div>
 
+    <script>
+        var icons = {
+            html:`devicon-html5-plain-wordmark`,
+            python:`devicon-python-plain-wordmark`,
+            php:`devicon-php-plain`,
+            dbms:`devicon-azuresqldatabase-plain`,
+            css:`devicon-css3-plain-wordmark`,
+            reactjs:`devicon-react-original`,
+            angularjs:`devicon-angularjs-plain`,
+        }
+        console.log(icons.html)
+        ($(".exam-icon").each(function(){
+            let key = $(this).attr("data-icon")
+            $(this).addClass(icons[key])
+        }))
+    </script>
 {% endblock %}

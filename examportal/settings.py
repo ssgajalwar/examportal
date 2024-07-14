@@ -13,8 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import Creds
-
+from . import Creds
 
 
 NEWS_API_KEY = os.getenv('NEWS_API_KEY', Creds.NEWS_API_KEY)
@@ -29,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = Creds.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['examgeek.herokuapp.com', 'localhost']
 

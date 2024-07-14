@@ -1,11 +1,11 @@
 <div class="sidebar">
-    <a class="home" data-id="home" href="/">Home</a>
-    <a class="news" data-id="news" href="/tech_news">News</a>
-    <a class="dashboard" data-id="dashboard" href="/dashboard">Dashboard</a>
-    <a class="courses" data-id="courses" href="/courses">Courses</a>
-    <a class="profile" data-id="profile" href="/profile">Profile</a>
-    <a class="roadmaps" data-id="roadmaps" href="/roadmaps">Roadmaps</a>
-    <a class="settings" data-id="settings" href="/settings">Settings</a>
+    <a class="home" data-id="home" href="/"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+    <a class="news" data-id="news" href="/tech_news"><i class="fa-solid fa-newspaper"></i><span>News</span></a>
+    <a class="dashboard" data-id="dashboard" href="/dashboard"><i class="fa-solid fa-table-columns"></i><span>Dashboard</span></a>
+    <a class="courses" data-id="courses" href="/courses"><i class="fa-solid fa-video"></i><span>Courses</span></a>
+    <a class="profile" data-id="profile" href="/profile"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+    <a class="roadmaps" data-id="roadmaps" href="/roadmaps"><i class="fa-solid fa-sitemap"></i><span>Roadmaps</span></a>
+    <a class="settings" data-id="settings" href="/settings"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
 </div>
 <style>
         .sidebar {
@@ -13,36 +13,62 @@
             width: 250px;
             position: fixed;
             background-color: #fff;
-            padding-top: 20px;
+            padding: 5px 10px;
             color: #4b0082;
+            border-radius: 25px;
+            display: none;
         }
         .sidebar a {
-            padding: 15px;
+            padding: 15px 20px;
             text-decoration: none;
             font-size: 18px;
             color: #575757;
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             border-right: 5px solid transparent;
-            transition: all 0.5s;
+            transition: all 0.9s;
+            /* transition: hover 0.9s; */
+            border-radius: 25px;
             font-weight: 500;
+            margin: 4px 0px;
+            cursor: pointer;
         }
         .sidebar a.active{
-            border-right: 5px solid #4b0082;
-            color: #4b0082;
+            background-color: #7c51fe;
+            color: #fff;
             font-weight: 600;
         }
         .sidebar a:hover {
-            border-right: 5px solid #4b0082;
-            color: #4b0082;
+            background-color: #7c51fe94;
+            color: #fff;
             font-weight: 600;
+            
             /* background-color: #575757; */
         }
-        .content {
+        .content{
+            margin-left: 0px;
+        }
+        .search-form,.navbar-text{
+            display: none !important;
+        }
+        @media (min-width:500px) {
+            .search-form,.navbar-text{
+                display: flex !important;
+            }
+            .sidebar{
+                display: block;
+            }
+            .content {
             margin-top: 15px;
             margin-left: 260px;
             padding: 20px;
             background-color: #fff;
+            border-radius: 25px;
         }
+        }
+
+
 </style>
 <script>
     $("a").on('click',function(){

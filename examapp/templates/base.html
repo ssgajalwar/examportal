@@ -24,9 +24,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <!-- {% include 'aos.html' %} -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script> -->
-    <!-- <script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+          
+    <!-- {% include 'aos.html' %}  -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
         AOS.init();
     </script> -->
     <style>
@@ -121,14 +125,14 @@
             </a>
             
             <!-- Search Form -->
-            <form class="form-inline search-form my-2 my-lg-0 mx-auto" action="{% url 'home'%}" method="post">
+            <form class="form-inline search-form my-2" action="{% url 'home'%}" method="post">
                 {% csrf_token %}
                 <input class="form-control base-form-control mr-sm-2 px-4" type="search" name="query" placeholder="Search" aria-label="Search">
                 <input type="submit" value="Search" style="font-size: 14px;" class=" btn-theme mx-2">
             </form>
             
             <!-- User Profile and Login/Logout Button -->
-            <div class="navbar-text ml-auto">
+            <div class="navbar-text">
                 <!-- <span class="base-user-profile mr-3">{{ user.username }}</span> User profile name -->
                 <button type="button" id="btn-premium" class="btn-theme btn-sm" data-toggle="modal" data-target="#myModal">
                     Get Premium
