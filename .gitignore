@@ -7,8 +7,8 @@ venv/
 env/
 
 # Ignore local settings files (such as settings_local.py)
-/your_project_name/settings_local.py
-
+/examportal/settings.py
+/examportal/Creds.py
 # Ignore database files
 # db.sqlite3
 
@@ -24,3 +24,4 @@ env/
 # Ignore IDE or editor specific files
 .vscode/
 .idea/
+examportal/settings.py
