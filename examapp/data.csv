@@ -1,0 +1,26 @@
+Subject,Question,Option1,Option2,Option3,Option4,answerdef,Answer,
+HTML,What does the `defer` attribute do in a `<script>` tag?,Loads the script after the document has been parsed,Loads the script asynchronously,Loads the script before the document has been parsed,Prevents the script from being executed,a) Loads the script after the document has been parsed,1
+HTML,Which HTML5 element is used to embed an external application or interactive content?,<embed>,<iframe>,<object>,All of the above,d) All of the above,4
+HTML,How can you ensure that an HTML5 video element does not preload its content?,"Set `preload=""none""`","Set `preload=""auto""`","Set `preload=""metadata""`",Do not include the `preload` attribute,"a) Set `preload=""none""`",1
+HTML,Which HTML attribute specifies the character encoding for the HTML document?,charset,encoding,lang,meta,a) charset,1
+HTML,What is the purpose of the `rel` attribute in the `<link>` tag?,Specifies the relationship between the current document and the linked document,Specifies the MIME type of the linked document,Specifies the URL of the linked document,Specifies the location of the linked document,a) Specifies the relationship between the current document and the linked document,1
+HTML,Which attribute can be used to specify multiple possible image sources for a single `<img>` element to provide responsive images?,src,srcset,sizes,picture,b) srcset,2
+HTML,How do you create a drop-down list in HTML?,<select>,"<input type=""dropdown"">",<list>,<dropdown>,a) <select>,1
+HTML,What does the `download` attribute in an `<a>` tag do?,Specifies that the target will be downloaded when the hyperlink is clicked,Specifies that the link should open in a new tab,Specifies that the link should be treated as a file,Specifies that the link is a download link,a) Specifies that the target will be downloaded when the hyperlink is clicked,1
+HTML,Which HTML element is used to define important text?,<b>,<strong>,<i>,<important>,b) <strong>,2
+HTML,Which attribute is used to specify an inline CSS style for an element?,class,style,id,css,b) style,2
+HTML,Which HTML5 element is used to define navigation links?,<nav>,<ul>,<header>,<section>,a) <nav>,1
+HTML,What does the `hidden` attribute do?,Hides the element and prevents it from being rendered,Hides the element but still renders it in the DOM,Hides the element but keeps it in the layout,Hides the element and removes it from the layout,a) Hides the element and prevents it from being rendered,1
+HTML,Which attribute can be used to create an image map?,usemap,imagemap,map,coordinates,a) usemap,1
+HTML,What is the purpose of the `<figure>` element?,To group media content and its caption,To define a caption for a table,To define a figure number,To define a mathematical equation,a) To group media content and its caption,1
+HTML,Which attribute is used to specify the number of rows a cell should span in a table?,colspan,rowspan,span,row,b) rowspan,2
+HTML,What does the `autocomplete` attribute do in an `<input>` element?,Provides suggestions for possible input values,Automatically completes the input value based on the user's history,Validates the input value automatically,Specifies whether the input field should have autocomplete enabled,d) Specifies whether the input field should have autocomplete enabled,4
+HTML,Which element is used to group elements in a form?,<fieldset>,<group>,<section>,<formgroup>,a) <fieldset>,1
+HTML,How do you define a section that is quoted from another source?,<q>,<blockquote>,<cite>,<quote>,b) <blockquote>,2
+HTML,What is the purpose of the `aria-label` attribute?,To provide an accessible label for an element,To define a label for a form control,To provide a tooltip for an element,To define a relationship between elements,a) To provide an accessible label for an element,1
+HTML,Which HTML5 element is used to define a dialog box or window?,<dialog>,<window>,<modal>,<popup>,a) <dialog>,1
+HTML,How do you specify a field in a form should be auto-focused when the page loads?,autofocus,focused,defaultfocus,focus,a) autofocus,1
+HTML,Which HTML5 element is used to play audio files?,<audio>,<sound>,<music>,<media>,a) <audio>,1
+HTML,Which element represents the header of a section or a page?,<head>,<header>,<h1>,<section>,b) <header>,2
+HTML,What is the purpose of the `srcdoc` attribute in an `<iframe>` element?,To specify the HTML content of the embedded document,To specify the URL of the embedded document,To specify the MIME type of the embedded document,To specify the name of the embedded document,a) To specify the HTML content of the embedded document,1
+HTML,Which attribute is used to define the URL of a linked resource in an `<a>` tag?,src,href,link,url,b) href,2

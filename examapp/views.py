@@ -17,7 +17,12 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import update_session_auth_hash
+import pandas as pd
+import os
+import examapp
 
+
+@login_required
 def password_reset_request(request):
     if request.method == "POST":
         form = PasswordResetForm(request.POST)
@@ -39,7 +44,7 @@ def password_reset_request(request):
     else:
         form = PasswordResetForm()
     return render(request, 'examapp/password_reset.html', {'form': form})
-
+@login_required
 def otp_verification(request):
     if request.method == "POST":
         form = OTPForm(request.POST)
@@ -54,7 +59,7 @@ def otp_verification(request):
     else:
         form = OTPForm()
     return render(request, 'examapp/otp_verification.html', {'form': form})
-
+@login_required
 def set_new_password(request):
     if request.method == 'POST' and request.user.is_authenticated:
         form = PasswordChangeForm(request.user, request.POST)
@@ -125,7 +130,7 @@ def result(request, exam_id):
     }
     return render(request, 'examapp/result.html', context)
 
-
+@login_required
 def dashboard(request):
     exams = Exam.objects.all()
     watched_videos = WatchedVideo.objects.filter(user=request.user)
@@ -143,8 +148,6 @@ def dashboard(request):
         'watched_videos':watched_videos,
         'chart_data': json.dumps(chart_data),  # Convert Python dict to JSON string
     })
-
-
 
 def register(request):
     if request.method == 'POST':
@@ -271,7 +274,7 @@ def tech_news(request):
     }
     return render(request, 'examapp/tech_news.html', context)
 
-
+@login_required
 def settings(request):
     return render(request,'examapp/settings.html')
 
@@ -399,3 +402,33 @@ def roadmap_detail(request, profile):
         'skills': profile_skills
     }
     return render(request, 'examapp/roadmap_details.html', context)
+
+
+def loaddata(request):
+    csv_filepath = os.path.abspath(examapp.__path__[0])+'\q_css.csv'
+    csv_data = pd.read_csv(csv_filepath)
+    # print(os.path.abspath(examapp.__path__[0]),"hello")
+    # print(csv_filepath,"hello",csv_data)
+    # print(type(csv_data))
+    for index,row in csv_data.iterrows():
+        print(index,row["Question"])
+        subject = row["Subject"]
+        if row["Answer"] > 0:
+            answer = row["Answer"]
+        else:
+            answer = 0
+        exam = Exam.objects.get(title=subject)
+        question = Question(
+            exam=exam,
+            question_title=row["Question"],
+            option1=row["Option1"],
+            option2=row["Option2"],
+            option3=row["Option3"],
+            option4=row["Option4"],
+            answer= answer,
+            answer_defination=row["answerdef"]
+            )
+        question.save()
+        print("Saved Successful")
+        # break
+    return HttpResponse("Loading the Data....")
