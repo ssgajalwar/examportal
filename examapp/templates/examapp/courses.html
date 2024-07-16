@@ -2,20 +2,7 @@
 
 {% block content %}
 {% include 'sidebar.html'%}
-<style>
-    .card{
-        box-shadow: 1px 3px 20px 4px rgba(0, 0, 0, 0.2);
-        border: none;
-        border-radius: 25px;
-    }
-    .card-body{
-        padding: 10px;
 
-    }
-    .card-body iframe{
-        border-radius: 25px;
-    }
-</style>
 <div class="content">
     <div class="d-flex justify-content-end">
         <a href="{% url 'add_video' %}" class="btn btn-theme mb-4">Add New Video</a>

@@ -27,119 +27,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet" href="{% static 'examapp/style.css'%}">
           
     <!-- {% include 'aos.html' %}  -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init();
     </script> -->
-    <style>
-        /* Add your custom CSS here */
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #e1e1e1; 
-        }
-        .btn-theme{
-            background: #7c51fe;
-            border-radius: 25px;
-            padding: 7px 30px;
-            border: none;
-            outline: none;
-            text-decoration: none;
-            color: white;
-            
-        }
-        .btn-theme-secondary:hover,
-        .btn-theme:hover{
-            color: #ffffff;
-            text-decoration: none;
-        }
-        a.btn-theme:hover{
-            cursor: pointer;
-        }
-        .btn-theme-secondary{
-            background: #00e4e3;
-            border-radius: 25px;
-            padding: 7px 30px;
-            border: none;
-            outline: none;
-            text-decoration: none;
-            color: white;
-        }
-        .btn-theme-secondary:hover{
-            text-decoration: none;
-            border: none;
-        }
-        .btn-theme:focus,
-        .btn-theme-secondary:focus{
-            outline: none;
-            border: none;
-        }
-        .theme-heading{
-            color: #333333;
-        }
-        .theme-text{
-            color: #7c51fe;
-        }
-        .theme-text-secondary{
-            color: #00e4e3;
-        }
-        .bold-700{
-            font-weight: 700;
-        }
-        .text-three{
-            color: #cccccc ;
-        }
-        .base-navbar {
-            background-color: #ffffff;
-            position: fixed;
-            width: 100%;
-            z-index: 1000; /* Ensure it's above other content */
-        }
-        .base-navbar-brand {
-            color: #fff; /* Secondary color */
-        }
-        .base-form-control {
-            border-radius: 20px; /* Rounded border for search input */
-        }
-        .base-search-icon {
-            color: #808080; /* Medium opacity text */
-        }
-        .base-user-profile {
-            color: #fff; /* Secondary color */
-        }
-        .base-content {
-            padding: 70px 20px 20px 20px;
-        }
-        .mobilenav-btn{
-            font-size: 30px;
-            color: #7c51fe;
-            display: none;
-        }
-        .mobile-none{
-            display: flex;
-        }
-        @media (max-width: 767.98px) {
-            .mobilenav-btn{
-                display: block;
-            }
-            .base-content .content{
-                padding: 20px 5px;
-            }
-            .mobile-none{
-                display: none;
-            }
-            .question-box{
-                display: none;
-            }
-            .search-form,
-            .navbar-text{
-                display: none;
-            }
-        }
-
-    </style>
 </head>
 <body>
     <!-- Bootstrap Navbar -->
