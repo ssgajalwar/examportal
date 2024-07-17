@@ -83,3 +83,22 @@ class OTP(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     otp = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Skills(models.Model):
+    skill = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.skill
+
+class RoadMapList(models.Model):
+    roadmap_name = models.CharField(max_length=255)
+    skill = models.ManyToManyField(Skills)
+    def __str__(self):
+        return self.roadmap_name
+
+class RoadMap(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    roadmap = models.ForeignKey(RoadMapList,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.roadmap

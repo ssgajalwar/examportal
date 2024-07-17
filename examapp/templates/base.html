@@ -16,10 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Optional: JavaScript for Bootstrap -->
     <!-- <script src="payment.js"></script>  -->
-    <script async
-      src="https://pay.google.com/gp/p/js/pay.js"
-      onload="onGooglePayLoaded()"></script>
-    {% include 'payment.html' %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -38,39 +36,7 @@
 </head>
 <body>
     <!-- Bootstrap Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark base-navbar">
-        <div class="px-3 d-flex justify-content-between w-100">
-            <!-- Logo / Brand -->
-            <a class="navbar-brand base-navbar-brand" href="/">
-                <h2 class="theme-text  bold-700">Exam <span class="theme-text-secondary">GEEK</span></h2>
-            </a>
-            
-            <!-- Search Form -->
-            <form class="form-inline search-form my-2" action="{% url 'home'%}" method="post">
-                {% csrf_token %}
-                <input class="form-control base-form-control mr-sm-2 px-4" type="search" name="query" placeholder="Search" aria-label="Search">
-                <input type="submit" value="Search" style="font-size: 14px;" class=" btn-theme mx-2">
-            </form>
-            
-            <!-- User Profile and Login/Logout Button -->
-            <div class="navbar-text mobile-none">
-                <!-- <span class="base-user-profile mr-3">{{ user.username }}</span> User profile name -->
-                <button type="button" id="btn-premium" class="btn-theme btn-sm" data-toggle="modal" data-target="#myModal">
-                    Get Premium
-                </button>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="btn login-btn btn-theme btn-sm">Logout</a> <!-- Logout button -->
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn login-btn btn-theme btn-sm">Login</a> <!-- Login button -->
-                {% endif %}
-               
-
-            </div>
-            <div class="mobilenav-btn">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </div>
-    </nav>
+    {% include 'header.html'%}
 
     <!-- Content Block -->
     <div class="base-content">
@@ -104,5 +70,9 @@
             $(".sidebar").toggleClass("show-sidebar")
         })
     </script>
+        <script async
+          src="https://pay.google.com/gp/p/js/pay.js"
+          onload="onGooglePayLoaded()"></script>
+        {% include 'payment.html' %}
 </body>
 </html>

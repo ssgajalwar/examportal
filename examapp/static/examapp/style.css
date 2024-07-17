@@ -324,3 +324,9 @@
     .question-box .question-number.attempted {
         background-color: #4CAF50;
     }
+
+
+    /* RoadMap Page */
+    .roadmap .card-body{
+        padding: 18px;
+    }

@@ -2,15 +2,9 @@
 
 {% block content %}
 {% include 'sidebar.html' %}
-<style>
-    .card{
-        box-shadow: 1px 3px 20px 4px rgba(0, 0, 0, 0.2);
-        border: none;
-        border-radius: 25px;
-    }
-</style>
+
 <div class="content">
-    <div class="container mt-5">
+    <div class="container roadmap mt-5">
         <h2 class="text-center mb-4">Tech Job Profiles</h2>
         <div class="row">
             {% for profile in roadmaps %}
@@ -18,7 +12,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ profile }}</h5>
-                        <a href="{% url 'roadmap_detail' profile %}" class="btn btn-theme">View Skills</a>
+                        <div class="d-flex gap-2 justify-content-between ">
+                            <a href="{% url 'roadmap_detail' profile %}" class="btn btn-theme">View Skills</a>
+                            <button  class="btn btn-theme-secondary start-roadmap" data-roadmap="{{profile}}">Start Roamap</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,4 +23,24 @@
         </div>
     </div>
 </div>
+<script>
+
+    $(".start-roadmap").click(function(){
+        alert($(this).attr('data-roadmap'))
+        $.ajax({
+            url:'{% url "profile" %}',
+            type:'POST',
+            data : {
+                'user_id':123
+            },
+            success:function(response){
+                console.log(response)
+            },
+            error:function(response){
+                console.log(response)
+            }
+        })
+    })
+
+</script>
 {% endblock %}
