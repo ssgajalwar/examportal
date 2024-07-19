@@ -90,7 +90,7 @@ def exam(request, exam_id):
     exam = get_object_or_404(Exam, pk=exam_id)
     questions = exam.question_set.all()[:25]
     if not questions:
-        return HttpResponse("<h2>No Question Added Yet <a href='/'>Back to Home</a></h2>")
+        return HttpResponse("<h2>No Question Added Yet <a href='{% url 'home' %}'>Back to Home</a></h2>")
     return render(request, 'examapp/exam.html', {
         'questions': questions,
         'examname': exam,
@@ -277,7 +277,7 @@ def tech_news(request):
 @login_required
 def settings(request):
     return render(request,'examapp/settings.html')
-
+@login_required
 def roadmaps(request):
     roadmaps = {
         "Frontend": ["HTML", "CSS", "JavaScript", "React", "Angular", "Vue", "TypeScript", "Bootstrap", "Responsive Design", "GraphQL"],
@@ -339,6 +339,7 @@ def roadmaps(request):
     }
     return render(request, 'examapp/roadmaps.html', context)
 
+@login_required
 def roadmap_detail(request, profile):
     roadmaps = {
         "Frontend": ["HTML", "CSS", "JavaScript", "React", "Angular", "Vue", "TypeScript", "Bootstrap", "Responsive Design", "GraphQL"],
