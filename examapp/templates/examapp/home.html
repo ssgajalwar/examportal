@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
+{% load static %}
 {% block title %}Exam GEEK - Home Page{% endblock %}
 {% block content %}
     <style>
@@ -29,6 +30,7 @@
         .card-title {
             font-size: 24px;
             font-weight: bold;
+            text-align: center;
         }
         .card-text {
             font-size: 14px;
@@ -75,34 +77,66 @@
 
     {% include 'sidebar.html' %}
     <div class="content">
-        <h3 class="text-left theme-heading mx-4">Available Exams</h3>
-        <div class="row">
-            {% for exam in exams %}
-            <div class="col-md-3 d-flex justify-content-center">
-                <div class="card ">
-                    <div class="card-body">
-                        <div class="purple-title">
-                            <i data-icon="{{ exam.title|removespaces|lower}}" class="exam-icon "></i>
-                            <h5 class="card-title">{{ exam.title }}</h5>
-                        </div>
-                        <div class="card-content d-flex flex-column justify-content-between">
-                            <div>
-                                <h6 class="card-text bold-700 my-0">100 Marks</h6>
-                                <p class="card-text my-0">Test your knowledge in {{ exam.title }}</p>
+        <div class="p-1">
+            <h3 class="text-left theme-heading mx-4">Recommended Exams for {{roadmap}}</h3>
+            <div class="row">
+                
+                {% for exam in recommended_exams %}
+                <div class="col-md-3 d-flex justify-content-center">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="purple-title">
+                                <i data-icon="{{ exam.skill|removespaces|lower}}" class="exam-icon "></i>
+                                <h5 class="card-title">{{ exam.skill }}</h5>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
-                                <span class="bookmark"><i class="fa-solid fa-heart"></i></span>
+                            <div class="card-content d-flex flex-column justify-content-between">
+                                <div>
+                                    <h6 class="card-text bold-700 my-0">100 Marks</h6>
+                                    <p class="card-text my-0">Test your knowledge in {{ exam.skill }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between ">
+                                    <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
+                                    <span class="bookmark"><i class="fa-solid fa-heart"></i></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+        </div>
+        <div class="p-1">
+            <h3 class="text-left theme-heading mx-4">Available Exams</h3>
+            <div class="row">
+                {% for exam in exams %}
+                <div class="col-md-3 d-flex justify-content-center">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="purple-title">
+                                <i data-icon="{{ exam.title|removespaces|lower}}" class="exam-icon "></i>
+                                <h5 class="card-title">{{ exam.title }}</h5>
+                            </div>
+                            <div class="card-content d-flex flex-column justify-content-between">
+                                <div>
+                                    <h6 class="card-text bold-700 my-0">100 Marks</h6>
+                                    <p class="card-text my-0">Test your knowledge in {{ exam.title }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between ">
+                                    <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
+                                    <span class="bookmark"><i class="fa-solid fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" integrity="sha512-efUTj3HdSPwWJ9gjfGR71X9cvsrthIA78/Fvd/IN+fttQVy7XWkOAXb295j8B3cmm/kFKVxjiNYzKw9IQJHIuQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script>
+        
+        
         var icons = {
             html:`devicon-html5-plain-wordmark`,
             python:`devicon-python-plain-wordmark`,
@@ -117,5 +151,6 @@
             let key = $(this).attr("data-icon")
             $(this).addClass(icons[key])
         }))
-    </script>
+        </script>
+
 {% endblock %}

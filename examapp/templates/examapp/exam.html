@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 </head>
 <body>
@@ -131,4 +133,31 @@
             updateButtons();
         });
     </script>
+
+ 
+
+        <script>
+        $(document).ready (function (){
+            glass_notify("Exam Started","&#10003;")
+        });
+        //  (".submit-btn").click(async function(){
+        //     await glass_notify("Exam Submitted","&#10003;")
+        //     $("form").submit(false)
+        //     setTimeout(function(){
+        //         alert("subimeted")
+        //         $("form").submit(true)
+        //     },3000)
+        //     localStorage.setItem("exam-done","yes")
+        // })
+
+        // $("form").on("submit",function(e){
+        //     glass_notify("Exam Submitted","&#10003;")
+        //     e.preventDefault()
+        //     setTimeout(function(){
+        //         $("form")[0].submit()
+        //     },3000)
+        // })
+
+
+        </script>
 {% endblock %}

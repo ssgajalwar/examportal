@@ -94,11 +94,11 @@ class RoadMapList(models.Model):
     roadmap_name = models.CharField(max_length=255)
     skill = models.ManyToManyField(Skills)
     def __str__(self):
-        return self.roadmap_name
+        return str(self.roadmap_name)
 
 class RoadMap(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     roadmap = models.ForeignKey(RoadMapList,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.roadmap
+        return str(self.roadmap)

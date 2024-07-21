@@ -35,25 +35,35 @@
                 <button id="edit-btn" class="btn btn-secondary">Edit</button>
             </div>
         </div>
-        <h3 class="mt-5">Exam Attempts</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Exam</th>
-                    <th>Score</th>
-                    <th>Attempts</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user_exam in user_exams %}
-                <tr>
-                    <td>{{ user_exam.exam.title }}</td>
-                    <td>{{ user_exam.score }}</td>
-                    <td>{{ user_exam.attempts }}</td>
-                </tr>
+        <div class="p-2">
+            <h3 class="mt-5">Exam Attempts</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Exam</th>
+                        <th>Score</th>
+                        <th>Attempts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user_exam in user_exams %}
+                    <tr>
+                        <td>{{ user_exam.exam.title }}</td>
+                        <td>{{ user_exam.score }}</td>
+                        <td>{{ user_exam.attempts }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="p-2">
+            <h3>{{roadmap}}</h3>
+            <ul>
+                {% for i in skillset%}
+                <li>{{i}}</li>
                 {% endfor %}
-            </tbody>
-        </table>
+            </ul>
+        </div>
     </div>
 
     <script>
