@@ -98,7 +98,7 @@ class RoadMapList(models.Model):
 
 class RoadMap(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    roadmap = models.ForeignKey(RoadMapList,on_delete=models.CASCADE)
+    roadmap = models.ForeignKey(RoadMapList,on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return str(self.roadmap)

@@ -20,7 +20,7 @@ from django.contrib.auth import update_session_auth_hash
 import pandas as pd
 import os
 import examapp
-from . import roadmap_data
+# from . import roadmap_data
 
 @login_required
 def password_reset_request(request):
@@ -76,11 +76,14 @@ def set_new_password(request):
 
 def home(request):
     if request.user:
-        roadmap = RoadMap.objects.get(user=request.user)
-        skillset =RoadMapList.objects.get(roadmap_name=roadmap)
+        roadmap , create = RoadMap.objects.get_or_create(user=request.user)
+        roadmap.save()
+        print(request.user,roadmap)
+        recommended = []
+        if roadmap.roadmap != None :  
+            skillset =RoadMapList.objects.get(roadmap_name=roadmap)
+            recommended = skillset.skill.all()
 
-        recommended = Exam.objects.filter(title=["HTML","CSS"])
-        print(skillset.skill.all())  
     if request.method == 'POST' and 'query' in request.POST:
         query = request.POST.get('query')
         exams = Exam.objects.filter(
@@ -92,7 +95,7 @@ def home(request):
     return render(request, 'examapp/home.html', {
         'exams': exams,
         "roadmap":roadmap,
-        "recommended_exams":skillset.skill.all()
+        "recommended_exams":recommended
         })
 
 @login_required
@@ -142,18 +145,28 @@ def result(request, exam_id):
 
 @login_required
 def dashboard(request):
-    exams = Exam.objects.all()
+    exams = UserExam.objects.filter(user=request.user)
     watched_videos = WatchedVideo.objects.filter(user=request.user)
     # Example: Fetching data for charts
-    exam_titles = [exam.title for exam in exams]
-    exam_scores = [exam.userexam_set.aggregate(models.Sum('score'))['score__sum'] or 0 for exam in exams]
+    exam_titles = [exam.exam.title for exam in exams]
+    exam_scores = [exam.score or 0 for exam in exams]
 
     # Prepare data for ApexCharts
     chart_data = {
         'exam_titles': exam_titles,
         'exam_scores': exam_scores,
     }
+    print(chart_data)  
 
+    tup = []
+    ranking = UserExam.objects.values_list('user',flat=True)
+    for r in ranking:
+        if tup.__contains__(r) :
+            continue
+        else:
+            tup.append(r)
+
+    
     return render(request, 'examapp/dashboard.html', {
         'watched_videos':watched_videos,
         'chart_data': json.dumps(chart_data),  # Convert Python dict to JSON string
@@ -194,8 +207,11 @@ def user_logout(request):
 def profile(request):
     user = request.user
     roadmap = RoadMap.objects.get(user=user)
-    skillset = RoadMapList.objects.get(roadmap_name = roadmap.roadmap)
-    skill = skillset.skill.all()
+    skill = []
+    if roadmap.roadmap != None:
+        skillset = RoadMapList.objects.get(roadmap_name = roadmap.roadmap)
+        skill = skillset.skill.all()
+
     user_exams = UserExam.objects.filter(user=user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=user.profile)

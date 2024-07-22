@@ -37,32 +37,40 @@
         </div>
         <div class="p-2">
             <h3 class="mt-5">Exam Attempts</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Exam</th>
-                        <th>Score</th>
-                        <th>Attempts</th>
-                    </tr>
-                </thead>
-                <tbody>
+
+            <div class="card-wrapper">
+                <div class="row">
                     {% for user_exam in user_exams %}
-                    <tr>
-                        <td>{{ user_exam.exam.title }}</td>
-                        <td>{{ user_exam.score }}</td>
-                        <td>{{ user_exam.attempts }}</td>
-                    </tr>
+                    <div class="col-md-3">
+                        <div class="card p-2">
+                            <div class="card-body">
+                                <h3>{{ user_exam.exam.title }}</h3>
+                                <h6>Attempt : {{user_exam.attempts}}</h6>
+                                <progress id="file" value="{{ user_exam.score }}" max="100"> 32% </progress>
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
         <div class="p-2">
             <h3>{{roadmap}}</h3>
-            <ul>
-                {% for i in skillset%}
-                <li>{{i}}</li>
-                {% endfor %}
-            </ul>
+            <div class="row">
+            {% for user_exam in skillset %}
+                <div class="col-md-3 my-2 col-sm-12">
+                    <div class="card p-2">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3>{{ user_exam }}</h3>
+                                <p class="text-nowrap">0%</p>
+                            </div>
+                            <progress id="file" value="0" max="100"> 32% </progress>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
         </div>
     </div>
 
