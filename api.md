@@ -35,9 +35,173 @@
 - Method : exam(request,exam_id)
 - parametes :  request,exam_id
 - Request : GET - fetch first 25 questions of 'exam_id' from *Questions*
+-           POST - Send the Exam data to results page
 - Template : exam.html
 - Context : questions,examname,exam_id,iterator
 - Returns : when there are no questionns -> 
             HttpResponse(Message & link to Home)
             when there are questions -> 
             render(request,template,context)     
+
+3.Result - [Only AuthenticatedUser Allowed]
+- Path : 'exam/<int:exam_id>/result'
+- Name : 'result'
+- Method : result(request,exam_id)
+- Parameters : reqquest,exam_id
+- Request : GET - Check the Form and Orginal Data for correct answers and show that and calculate result
+- Template : result.html
+- Context : total_questions,correct_answers,exam,score
+- Returns : render(request,template,context)
+
+4.Register 
+- Path : 'accounts/register/'
+- Name : 'register'
+- Method : register(request)
+- Parameters : request
+- Request : - GET : Load the User Creation form
+-           - POST : Submit user creation form and save data (Create New User)
+- Template : register.html 
+- Context : form
+- Returns : render(request,template,context)
+
+5.Login
+- Path : ''accounts/login/'
+- Name : 'login'
+- Method : user_login(request)
+- Parameters : request
+- Request : - GET - Load the Login Form
+-           - POST - Check If user present and create a session
+- Template : login.html
+- Context : 
+- Returns : render(request,template)
+
+6.Logout
+- Path : 'logout/'
+- Name : logout
+- Method : user_logout
+- Parameters : request
+- Request : GET - Logout the user
+- Template : 
+- Context :
+- Returns : redirect('login')
+
+7.Profile
+- Path : 'profile/'
+- Name : profile
+- Method : profile(request)
+- Parameters : request 
+- Request : POST - Update Profile
+-           GET  - Fetch Exam History and Roadmap data 
+- Template : profile.html
+- Context : form,user_exam,roadmap,skillset
+- Returns : render(request,template,context)
+
+8.Dashboard
+- Path : 'dashboard/'
+- Name : dashboard
+- Method : dashboard(request)
+- Parameters : request
+- Request : GET - Fetch Graph data,Watched videos
+- Template : dashoard
+- Context : chart_data,watched_videos
+- Returns : render(request,template,context)
+
+9.Courses 
+- Path : 'courses/'
+- Name : courses
+- Method : courses(request)
+- Parameters : request
+- Request : GET - Fetch the Videos 
+- Template : courses.html
+- Context : videos
+- Returns : render(request,template,context)
+
+10.Add Video
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+11.Mark as Watched
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+12.Tech News
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+13.Password Reset
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+14.OTP Verification
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+15.SET New Password
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+16.Settings
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+17.Roadmaps
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
+
+18.RoadMap Details
+- Path : 
+- Name : 
+- Method : 
+- Parameters : 
+- Request : 
+- Template : 
+- Context :
+- Returns : 
