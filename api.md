@@ -117,14 +117,15 @@
 - Returns : render(request,template,context)
 
 10.Add Video
-- Path : 
-- Name : 
-- Method : 
-- Parameters : 
-- Request : 
-- Template : 
-- Context :
-- Returns : 
+- Path : 'add_video/'
+- Name : 'add_video'
+- Method :  add_video(request)
+- Parameters : request
+- Request : GET  - Load the Add Video Form
+-           POST - Send the data to Database
+- Template : add_video.html
+- Context : form
+- Returns : render(request,template,context)
 
 11.Mark as Watched
 - Path : 
