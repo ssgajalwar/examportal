@@ -22,6 +22,33 @@ import os
 import examapp
 # from . import roadmap_data
 
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('roadmaps')
+    else:
+        form = UserCreationForm()
+    return render(request, 'examapp/register.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('roadmaps')
+        else:
+            return render(request, 'examapp/login.html', {'error': 'Invalid username or password'})
+    return render(request, 'examapp/login.html')
+
 @login_required
 def password_reset_request(request):
     if request.method == "POST":
@@ -44,6 +71,7 @@ def password_reset_request(request):
     else:
         form = PasswordResetForm()
     return render(request, 'examapp/password_reset.html', {'form': form})
+
 @login_required
 def otp_verification(request):
     if request.method == "POST":
@@ -59,6 +87,7 @@ def otp_verification(request):
     else:
         form = OTPForm()
     return render(request, 'examapp/otp_verification.html', {'form': form})
+
 @login_required
 def set_new_password(request):
     if request.method == 'POST' and request.user.is_authenticated:
@@ -74,6 +103,7 @@ def set_new_password(request):
 
     return render(request, 'examapp/set_new_password.html', {'form': form})
 
+@login_required
 def home(request):
     if request.user:
         roadmap , create = RoadMap.objects.get_or_create(user=request.user)
@@ -172,32 +202,6 @@ def dashboard(request):
         'chart_data': json.dumps(chart_data),  # Convert Python dict to JSON string
     })
 
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'examapp/register.html', {'form': form})
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            return render(request, 'examapp/login.html', {'error': 'Invalid username or password'})
-    return render(request, 'examapp/login.html')
-
 @login_required
 def user_logout(request):
     logout(request)
@@ -227,37 +231,7 @@ def profile(request):
         "skillset": skill
     })
 
-
-# def courses(request):
-#     url = "https://learn-online.p.rapidapi.com/Install_Header"
-
-#     querystring = {"NEW_GET": "Install_Header"}
-
-#     headers = {
-#         "x-rapidapi-key": "9ca6668288msh216ee79442c9217p1c18f5jsndc64c33017c0",  # Replace with your actual API key
-#         "x-rapidapi-host": "learn-online.p.rapidapi.com",
-#         "NEW_Get": "Install_Header"
-#     }
-
-    # try:
-    #     response = requests.get(url, headers=headers, params=querystring)
-    #     response.raise_for_status()  # Raise an error for bad status codes
-    #     data = response.json()  # Parse the JSON response
-    # except requests.exceptions.RequestException as e:
-    #     return HttpResponse(f"An error occurred: {e}")
-    # except ValueError:
-    #     return HttpResponse(f"Invalid JSON response: {response.text}")
-
-    # Print the data for debugging purposes
-    # print(data)
-
-    # context = {
-    #     'courses': ""
-    # }
-
-    # return render(request, 'examapp/courses.html', context)
-
-
+@login_required
 def courses(request):
     videos = YouTubeVideo.objects.all()
     
@@ -284,9 +258,7 @@ def mark_as_watched(request, video_id):
     WatchedVideo.objects.get_or_create(user=request.user, video=video)
     return redirect('courses')
 
-
-
-
+@login_required
 def tech_news(request):
     url = "https://newsapi.org/v2/everything?q=tesla&from=2024-06-08&sortBy=publishedAt&apiKey=cd421bb2a3ee4a52b7f145b55b2bcf4a"
     # params = {
@@ -308,6 +280,7 @@ def tech_news(request):
 @login_required
 def settings(request):
     return render(request,'examapp/settings.html')
+
 @login_required
 def roadmaps(request):
     user = request.user
@@ -374,7 +347,6 @@ def loaddata(request):
         print("Saved Successful")
         # break
     return HttpResponse("Loading the Data....")
-
 
 def loadroadmap(request):
     print(roadmap_data.rdata.keys())
