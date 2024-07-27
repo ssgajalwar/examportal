@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django_otp',
-    'django_otp.plugins.otp_totp',
+    'django-otp',
+    'django-otp.plugins.otp_totp',
     'rest_framework',
     'examapp'
 ]
