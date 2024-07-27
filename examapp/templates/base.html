@@ -6,76 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Exam GEEK{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{% static 'examapp/favicon/clipboard2.ico'%}">
+    
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons (optional) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"> -->
-    <!-- Custom CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- Optional: JavaScript for Bootstrap -->
-    <!-- <script src="payment.js"></script>  -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'examapp/style.css'%}">
     <link rel="stylesheet" href="{% static 'examapp/css/glass_notify.css'%}">
-    <script src="{% static 'examapp/JS/glass_notify.js'%}"></script>     
-    <!-- {% include 'aos.html' %}  -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init();
-    </script> -->
-
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="{% static 'examapp/JS/glass_notify.js'%}"></script>
 </head>
 <body>
-    <!-- Bootstrap Navbar -->
     {% include 'header.html'%}
 
-    <!-- Content Block -->
     <div class="base-content">
         <div class="md-px-3 sm-px-0">
             {% block content %}
-                
             {% endblock %}
         </div>
     </div>
+    
     <div class="modal fade" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Pay Using GPay</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <!-- Modal Body -->
                 <div class="modal-body d-flex justify-content-center align-items-center py-3">
                     <div id="container"></div>
                 </div>
-                <!-- Modal Footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+    
     <script>
-        $(".mobilenav-btn").on("click",function(){
+        $(".mobilenav-btn").on("click", function(){
             $(".sidebar").toggleClass("show-sidebar")
         })
     </script>
-        <script async
-          src="https://pay.google.com/gp/p/js/pay.js"
-          onload="onGooglePayLoaded()"></script>
-        {% include 'payment.html' %}
+    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+    {% include 'payment.html' %}
 </body>
 </html>

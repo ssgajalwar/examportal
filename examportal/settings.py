@@ -30,7 +30,7 @@ SECRET_KEY = Creds.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shreenath.pythonanywhere.com','examgeek.herokuapp.com', 'localhost',]
+ALLOWED_HOSTS = ['shreenath.pythonanywhere.com','examgeek.herokuapp.com', 'localhost','mca1415.pythonanywhere.com']
 
 
 # Application definition
