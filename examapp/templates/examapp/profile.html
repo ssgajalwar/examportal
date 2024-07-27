@@ -24,16 +24,7 @@
                 <p><strong>Email:</strong> {{ user.email }}</p>
                 <!-- Add other profile fields as needed -->
             </div>
-            <div id="profile-form" style="display: none;">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-            </div>
-            <div class="edit-btn">
-                <button id="edit-btn" class="btn btn-secondary">Edit</button>
-            </div>
+
         </div>
         <div class="p-2">
             <h3 class="mt-5">Exam Attempts</h3>
@@ -44,9 +35,9 @@
                     <div class="col-md-3">
                         <div class="card p-2">
                             <div class="card-body">
-                                <h3>{{ user_exam.exam.title }}</h3>
+                                <h3>{{ user_exam.exam.title.skill }}</h3>
                                 <h6>Attempt : {{user_exam.attempts}}</h6>
-                                <progress id="file" value="{{ user_exam.score }}" max="100"> 32% </progress>
+                                <progress id="file" value="{{ user_exam.score }}" title="{{ user_exam.score }} % completed" max="100"> 32% </progress>
                             </div>
                         </div>
                     </div>
@@ -74,25 +65,4 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('edit-btn').addEventListener('click', function() {
-            var profileText = document.getElementById('profile-text');
-            var profileForm = document.getElementById('profile-form');
-            var editBtn = document.getElementById('edit-btn');
-            
-            if (profileForm.style.display === 'none') {
-                profileText.style.display = 'none';
-                profileForm.style.display = 'block';
-                editBtn.innerText = 'Cancel';
-                editBtn.classList.remove('btn-secondary');
-                editBtn.classList.add('btn-danger');
-            } else {
-                profileText.style.display = 'block';
-                profileForm.style.display = 'none';
-                editBtn.innerText = 'Edit';
-                editBtn.classList.remove('btn-danger');
-                editBtn.classList.add('btn-secondary');
-            }
-        });
-    </script>
 {% endblock %}

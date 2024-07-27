@@ -31,10 +31,24 @@
         text-decoration: none;
         color: white;
     }
+    .btn-theme-tab{
+        background: #00e4e446;
+        border-radius: 25px;
+        padding: 7px 30px;
+        border: none;
+        outline: none;
+        text-decoration: none;
+        color: white;
+    }
+    .btn-theme-tab.active{
+        background: #00e4e3;
+
+    }
     .btn-theme-secondary:hover{
         text-decoration: none;
         border: none;
     }
+    .btn-theme-tab:focus,
     .btn-theme:focus,
     .btn-theme-secondary:focus{
         outline: none;

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Exam, Question, Choice, UserResponse,YouTubeVideo,WatchedVideo,RoadMapList,RoadMap,Skills
+from .models import Exam, Question, Choice, UserResponse,YouTubeVideo,WatchedVideo,RoadMapList,RoadMap,Skills,UserExam
 
 admin.site.register(Exam)
 admin.site.register(Question)
@@ -10,3 +10,4 @@ admin.site.register(WatchedVideo)
 admin.site.register(RoadMapList)
 admin.site.register(RoadMap)
 admin.site.register(Skills)
+admin.site.register(UserExam)  

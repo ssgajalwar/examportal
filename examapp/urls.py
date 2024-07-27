@@ -26,5 +26,6 @@ urlpatterns = [
     # Load Data
     path('loaddata/',views.loaddata,name='loaddata'),
     path('loadroadmap/',views.loadroadmap,name='loadroadmap'),
+    path('loadexam/',views.loadexam,name='loadexam'),
 
 ]
