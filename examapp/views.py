@@ -20,8 +20,8 @@ from django.contrib.auth import update_session_auth_hash
 import pandas as pd
 import os
 import examapp
-# from . import roadmap_data
-
+from . import roadmap_data
+import math
 
 def register(request):
     if request.method == 'POST':
@@ -108,7 +108,6 @@ def home(request):
     if request.user:
         roadmap , create = RoadMap.objects.get_or_create(user=request.user)
         roadmap.save()
-        print(request.user,roadmap)
         recommended = []
         if roadmap.roadmap != None :  
             skillset =RoadMapList.objects.get(roadmap_name=roadmap)
@@ -133,7 +132,7 @@ def exam(request, exam_id):
     exam = get_object_or_404(Exam, pk=exam_id)
     questions = exam.question_set.all()[:25]
     if not questions:
-        return HttpResponse("<h2>No Question Added Yet <a href='{% url 'home' %}'>Back to Home</a></h2>")
+        return HttpResponse("<h2>No Question Added Yet <a href='/'>Back to Home</a></h2>")
     return render(request, 'examapp/exam.html', {
         'questions': questions,
         'examname': exam,
@@ -156,14 +155,21 @@ def result(request, exam_id):
             if str(correct_answer) == submitted_answer:
                 correct_answers += 1
         total_questions += 1
-    score = correct_answers * 4 - (total_questions - correct_answers)
-    
+    score = correct_answers * 4 
+      
     # Update or create UserExam record
     user_exam, created = UserExam.objects.get_or_create(user=request.user, exam=exam)
+    print(user_exam)
     if not created:
+        print(user_exam)
         user_exam.attempts += 1
-    user_exam.score = score
-    user_exam.save()
+        if score > user_exam.score:
+            user_exam.score = score   
+        user_exam.save()  
+    else:
+        user_exam.score = score   
+        user_exam.save()   
+
 
     context = {
         'total_questions': total_questions,
@@ -178,7 +184,7 @@ def dashboard(request):
     exams = UserExam.objects.filter(user=request.user)
     watched_videos = WatchedVideo.objects.filter(user=request.user)
     # Example: Fetching data for charts
-    exam_titles = [exam.exam.title for exam in exams]
+    exam_titles = [exam.exam.title.skill for exam in exams]
     exam_scores = [exam.score or 0 for exam in exams]
 
     # Prepare data for ApexCharts
@@ -186,7 +192,6 @@ def dashboard(request):
         'exam_titles': exam_titles,
         'exam_scores': exam_scores,
     }
-    print(chart_data)  
 
     tup = []
     ranking = UserExam.objects.values_list('user',flat=True)
@@ -270,7 +275,6 @@ def tech_news(request):
     
     response = requests.get(url)
     news_data = response.json().get('articles', []) if response.status_code == 200 else []
-    print(news_data,"hiii")
 
     context = {
         'news_data': news_data
@@ -284,7 +288,6 @@ def settings(request):
 @login_required
 def roadmaps(request):
     user = request.user
-    print(request.POST)
     roadmap_name = request.POST.get("roadmap")
     if request.method == "POST":
         rmprofile = RoadMapList.objects.get(roadmap_name=roadmap_name)
@@ -292,15 +295,12 @@ def roadmaps(request):
         if exist_roadmap:
             exist_roadmap.roadmap=rmprofile
             exist_roadmap.save()
-            print("road map already there")
         else :
             roadmap , create = RoadMap.objects.get_or_create(user=request.user, roadmap=rmprofile)
             roadmap.save()
-            print("Saved Success")
 
     
     roadmapsdb = RoadMapList.objects.all()
-    print(roadmapsdb)
     context = {
         'roadmapdb':roadmapsdb
     }
@@ -308,10 +308,7 @@ def roadmaps(request):
 
 @login_required
 def roadmap_detail(request, profile):
-    # profile_skills = roadmaps.get(profile, [])
     profile_skills = RoadMapList.objects.get(roadmap_name=profile)
-    print(profile_skills.skill.all())
-    print(profile,profile_skills)
     context = {
         'profile': profile,
         'skills': profile_skills.skill.all()
@@ -326,30 +323,29 @@ def loaddata(request):
     # print(csv_filepath,"hello",csv_data)
     # print(type(csv_data))
     for index,row in csv_data.iterrows():
-        print(index,row["Question"])
         subject = row["Subject"]
-        if row["Answer"] > 0:
-            answer = row["Answer"]
-        else:
-            answer = 0
-        exam = Exam.objects.get(title=subject)
-        question = Question(
+        sk = Skills.objects.get(skill=subject)
+        exam = Exam.objects.get(title=sk)
+        correct_option = float(row["correct_option"]) 
+        if math.isnan(correct_option):
+            correct_option = 0   
+        
+          
+        question , create = Question.objects.get_or_create(
             exam=exam,
             question_title=row["Question"],
-            option1=row["Option1"],
-            option2=row["Option2"],
-            option3=row["Option3"],
-            option4=row["Option4"],
-            answer= answer,
+            option1=row["Option A"],
+            option2=row["Option B"],
+            option3=row["Option C"],
+            option4=row["Option D"],
+            answer= correct_option,  
             answer_defination=row["answerdef"]
-            )
-        question.save()
-        print("Saved Successful")
+        )  
+        # question.save()
         # break
     return HttpResponse("Loading the Data....")
 
 def loadroadmap(request):
-    print(roadmap_data.rdata.keys())
     for roadmap_name, skills in roadmap_data.rdata.items():
     # Create or get the RoadMapList instance
         roadmap, created = RoadMapList.objects.get_or_create(roadmap_name=roadmap_name.capitalize())
@@ -360,5 +356,13 @@ def loadroadmap(request):
             # Add the skill to the roadmap
             roadmap.skill.add(skill)
     
-    print(f'Successfully added {roadmap_name} with skills: {", ".join(skills)}')
     return HttpResponse("Loading the Data....")
+
+
+def loadexam(request):
+    sk = Skills.objects.all()
+    for s in sk:
+        exam,create = Exam.objects.get_or_create(title=s,description="description")
+        exam.save()
+        print("saved",s)
+    return HttpResponse("Loading Exams")      

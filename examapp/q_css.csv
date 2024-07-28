@@ -1,0 +1,51 @@
+Subject,Question,Option A,Option B,Option C,Option D,answerdef,correct_option
+Responsive Design,What is responsive web design?,A design that adjusts to different screen sizes,A design that uses only fixed units,A design that ignores user input,A design that uses only images,A design that adjusts to different screen sizes,1
+Responsive Design,Which CSS property is used to control the layout on different screen sizes?,@media,border,position,z-index,@media,1
+Responsive Design,What does the `viewport` meta tag do in responsive design?,Controls the layout of the page,Specifies the width of the device,Defines the zoom level of the page,All of the above,All of the above,4
+Responsive Design,How do you create a flexible layout in CSS?,Using `flexbox`,Using `table`,Using `grid`,Using `float`,Using `flexbox`,1
+Responsive Design,What is the purpose of media queries in responsive design?,To apply styles based on device characteristics,To define fixed-width layouts,To create animations,To manage server requests,To apply styles based on device characteristics,1
+Responsive Design,Which unit is commonly used for responsive typography?,px,em,in,pt,em,2
+Responsive Design,How do you create a responsive image in HTML?,Using the `srcset` attribute,Using the `sizes` attribute,Using the `picture` element,All of the above,All of the above,4
+Responsive Design,What is the primary benefit of using a mobile-first approach?,Better performance on mobile devices,Better performance on desktop devices,Easier to design for large screens,Better SEO,Better performance on mobile devices,1
+Responsive Design,Which of the following is a common breakpoint for responsive design?,320px,640px,960px,All of the above,All of the above,4
+Responsive Design,How do you ensure a layout adapts to different screen sizes?,Using percentages,Using fixed units,Using absolute positioning,Using z-index,Using percentages,1
+Responsive Design,What is the purpose of the `flex` property in CSS?,To create a flexible container,To create a fixed container,To create an absolute container,To create a static container,To create a flexible container,1
+Responsive Design,How do you center a flex item in a flex container?,Using `justify-content`,Using `align-items`,Using `align-self`,Using `margin`,Using `align-self`,3
+Responsive Design,Which property is used to create a grid layout in CSS?,grid-template-columns,flex-direction,display,position,grid-template-columns,1
+Responsive Design,What is the purpose of the `min-width` property in CSS?,To set the minimum width of an element,To set the maximum width of an element,To set the default width of an element,To set the initial width of an element,To set the minimum width of an element,1
+Responsive Design,How do you hide an element on small screens?,Using `display: none` with a media query,Using `visibility: hidden` with a media query,Using `opacity: 0` with a media query,Using `z-index: -1` with a media query,Using `display: none` with a media query,1
+Responsive Design,What is the `rem` unit based on?,The root element's font size,The parent element's font size,The viewport width,The screen resolution,The root element's font size,1
+Responsive Design,How do you create a responsive navigation menu?,Using media queries and flexbox,Using media queries and floats,Using fixed positioning and media queries,Using z-index and media queries,Using media queries and flexbox,1
+Responsive Design,What is the purpose of the `vw` unit in CSS?,To set the width relative to the viewport width,To set the width relative to the parent element,To set the width relative to the root element,To set the width relative to the screen resolution,To set the width relative to the viewport width,1
+Responsive Design,How do you create a responsive grid in CSS?,Using `grid-template-columns` and `grid-template-rows`,Using `flex-direction` and `flex-wrap`,Using `position` and `float`,Using `display` and `visibility`,Using `grid-template-columns` and `grid-template-rows`,1
+Responsive Design,What is the purpose of the `max-width` property in CSS?,To set the maximum width of an element,To set the minimum width of an element,To set the default width of an element,To set the initial width of an element,To set the maximum width of an element,1
+Responsive Design,How do you make text responsive in CSS?,Using `vw` units,Using `vh` units,Using `em` units,Using `px` units,Using `vw` units,1
+Responsive Design,What is the primary goal of responsive design?,To ensure content looks good on all devices,To create fixed-width layouts,To create animations,To manage server requests,To ensure content looks good on all devices,1
+Responsive Design,Which of the following is a mobile-first breakpoint?,480px,768px,1024px,1200px,480px,1
+Responsive Design,How do you make a video responsive in HTML?,Using the `video` element with `width` and `height` set to 100%,Using the `iframe` element,Using the `embed` element,Using the `object` element,Using the `video` element with `width` and `height` set to 100%,1
+Responsive Design,What is the purpose of the `media` attribute in a `<link>` element?,To specify the media type for linked stylesheets,To specify the alternate text for linked stylesheets,To specify the URL for linked stylesheets,To specify the type of linked stylesheets,To specify the media type for linked stylesheets,1
+GraphQL,What is GraphQL?,A query language for APIs,A database,A front-end framework,A back-end framework,A query language for APIs,1
+GraphQL,Which company developed GraphQL?,Google,Facebook,Microsoft,Amazon,Facebook,2
+GraphQL,How do you define a query in GraphQL?,Using the `query` keyword,Using the `fetch` keyword,Using the `get` keyword,Using the `retrieve` keyword,Using the `query` keyword,1
+GraphQL,What is a resolver in GraphQL?,A function that resolves a query,An object that holds data,An API endpoint,A database, A function that resolves a query,1
+GraphQL,What is the purpose of a schema in GraphQL?,To define the structure of data,To fetch data from the server,To define styles,To create a database,To define the structure of data,1
+GraphQL,How do you specify the type of a field in a GraphQL schema?,Using a colon followed by the type,Using a semicolon followed by the type,Using an equals sign followed by the type,Using a comma followed by the type,Using a colon followed by the type,1
+GraphQL,What is a mutation in GraphQL?,An operation to modify data,An operation to fetch data,An operation to define data,An operation to delete data,An operation to modify data,1
+GraphQL,How do you execute a GraphQL query?,Using a GraphQL client,Using a REST client,Using a SOAP client,Using a WebSocket client,Using a GraphQL client,1
+GraphQL,What is the purpose of the `!` symbol in a GraphQL schema?,To indicate a non-nullable field,To indicate a nullable field,To indicate an array,To indicate a string,To indicate a non-nullable field,1
+GraphQL,How do you define an array in a GraphQL schema?,Using square brackets,Using curly braces,Using parentheses,Using angle brackets,Using square brackets,1
+GraphQL,What is the purpose of the `@` symbol in a GraphQL query?,To specify a directive,To specify a fragment,To specify a variable,To specify a type,To specify a directive,1
+GraphQL,How do you handle errors in GraphQL?,Using error objects,Using try-catch blocks,Using error codes,Using status codes,Using error objects,1
+GraphQL,What is a fragment in GraphQL?,A reusable piece of a query,An error handler,A type definition,A resolver,A reusable piece of a query,1
+GraphQL,How do you define a variable in a GraphQL query?,Using the `$` symbol,Using the `@` symbol,Using the `#` symbol,Using the `&` symbol,Using the `$` symbol,1
+GraphQL,What is introspection in GraphQL?,A feature to query the schema itself,A feature to fetch data,A feature to modify data,A feature to delete data,A feature to query the schema itself,1
+GraphQL,How do you alias a field in a GraphQL query?,Using the `as` keyword,Using the `alias` keyword,Using the `@` symbol,Using the `#` symbol,Using the `as` keyword,1
+GraphQL,What is a union type in GraphQL?,A type that can be one of multiple types,A type that combines multiple types,A type that extends another type,A type that implements an interface,A type that can be one of multiple types,1
+GraphQL,How do you define an enum in a GraphQL schema?,Using the `enum` keyword,Using the `enum` function,Using the `enum` class,Using the `enum` variable,Using the `enum` keyword,1
+GraphQL,What is the purpose of the `__typename` field in a GraphQL query?,To get the name of the type of an object,To get the value of a field,To get the type of a field,To get the name of a field,To get the name of the type of an object,1
+GraphQL,How do you create a subscription in GraphQL?,Using the `subscription` keyword,Using the `query` keyword,Using the `mutation` keyword,Using the `fetch` keyword,Using the `subscription` keyword,1
+GraphQL,What is the purpose of a directive in GraphQL?,To provide instructions for execution,To define a type,To fetch data,To modify data,To provide instructions for execution,1
+GraphQL,How do you handle pagination in GraphQL?,Using cursor-based pagination,Using offset-based pagination,Using page-based pagination,Using keyset pagination,Using cursor-based pagination,1
+GraphQL,What is a scalar type in GraphQL?,A primitive type,A custom type,A complex type,An object type,A primitive type,1
+GraphQL,How do you define a custom scalar type in GraphQL?,Using the `scalar` keyword,Using the `type` keyword,Using the `custom` keyword,Using the `scalarType` keyword,Using the `scalar` keyword,1
+GraphQL,What is the purpose of the `context` argument in a resolver function?,To provide shared information to all resolvers,To define a type,To fetch data,To modify data,To provide shared information to all resolvers,1

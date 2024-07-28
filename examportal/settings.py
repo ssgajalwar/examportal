@@ -30,7 +30,7 @@ SECRET_KEY = Creds.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shreenath.pythonanywhere.com','examgeek.herokuapp.com', 'localhost',]
+ALLOWED_HOSTS = ['shreenath.pythonanywhere.com','examgeek.herokuapp.com', 'localhost','mca1415.pythonanywhere.com']
 
 
 # Application definition
@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'examportal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# for development
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,10 +93,18 @@ WSGI_APPLICATION = 'examportal.wsgi.application'
 
 # for production
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join('/home/shreenath/examportal', 'db.sqlite3'),
+#     }
+# }
+
+# for testing
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join('/home/shreenath/examportal', 'db.sqlite3'),
+        'NAME': os.path.join('/home/mca1415/ExamGEEK', 'db.sqlite3'),
     }
 }
 

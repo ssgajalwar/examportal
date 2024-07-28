@@ -78,9 +78,38 @@
     {% include 'sidebar.html' %}
     <div class="content">
         <div class="p-1">
-            <h3 class="text-left theme-heading mx-4">Recommended Exams for {{roadmap}}</h3>
-            <div class="row">
-                
+            <div class="mb-3">
+                <button class="btn-theme-tab tab-btn all-btn active" onclick="changeHomeContainer('all')">All</button>
+                {% if roadmap %}
+                <button class="btn-theme-tab tab-btn roadmap-btn" onclick="changeHomeContainer('roadmap')">{{roadmap}}</button>
+                {% endif %}
+                <button class="btn-theme-tab tab-btn favourite-btn" onclick="changeHomeContainer('favourite')">Favourite</button>
+            </div>
+            <div class="row all-container d-none">
+                {% for exam in exams %}
+                <div class="col-md-3 d-flex justify-content-center">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="purple-title">
+                                <i data-icon="{{ exam.title.skill|removespaces|lower}}" class="exam-icon "></i>
+                                <h5 class="card-title">{{ exam.title.skill }}</h5>
+                            </div>
+                            <div class="card-content d-flex flex-column justify-content-between">
+                                <div>
+                                    <h6 class="card-text bold-700 my-0">100 Marks</h6>
+                                    <p class="card-text my-0">Test your knowledge in {{ exam.title.skill }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between ">
+                                    <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
+                                    <span class="bookmark"><i class="fa-solid fa-heart"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row roadmap-container">                
                 {% for exam in recommended_exams %}
                 <div class="col-md-3 d-flex justify-content-center">
                     <div class="card ">
@@ -104,32 +133,8 @@
                 </div>
                 {% endfor %}
             </div>
-        </div>
-        <div class="p-1">
-            <h3 class="text-left theme-heading mx-4">Available Exams</h3>
-            <div class="row">
-                {% for exam in exams %}
-                <div class="col-md-3 d-flex justify-content-center">
-                    <div class="card ">
-                        <div class="card-body">
-                            <div class="purple-title">
-                                <i data-icon="{{ exam.title|removespaces|lower}}" class="exam-icon "></i>
-                                <h5 class="card-title">{{ exam.title }}</h5>
-                            </div>
-                            <div class="card-content d-flex flex-column justify-content-between">
-                                <div>
-                                    <h6 class="card-text bold-700 my-0">100 Marks</h6>
-                                    <p class="card-text my-0">Test your knowledge in {{ exam.title }}</p>
-                                </div>
-                                <div class="d-flex justify-content-between ">
-                                    <a href="{% url 'exam' exam.id %}" class="btn-theme-secondary text-white ">Start Exam</a>
-                                    <span class="bookmark"><i class="fa-solid fa-heart"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+            <div class="row favourite-container d-none">
+                <h3>Favourite Is Empty</h3>
             </div>
         </div>
     </div>
@@ -151,6 +156,19 @@
             let key = $(this).attr("data-icon")
             $(this).addClass(icons[key])
         }))
+
+        function changeHomeContainer(x){
+            $(".all-container").addClass("d-none")
+            $(".roadmap-container").addClass("d-none")
+            $(".favourite-container").addClass("d-none")
+            $(".all-btn").removeClass("active")
+            $(".roadmap-btn").removeClass("active")
+            $(".favourite-btn").removeClass("active")
+            
+            $(`.${x}-container`).removeClass("d-none")
+            $(`.${x}-btn`).addClass("active")
+        }
+
         </script>
 
 {% endblock %}
