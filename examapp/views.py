@@ -1,6 +1,6 @@
 # views.py
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Exam, Question, UserResponse, UserExam,YouTubeVideo,WatchedVideo,OTP,Profile,RoadMap,RoadMapList,Skills
+from .models import Exam, Question, UserResponse, UserExam,YouTubeVideo,WatchedVideo,OTP,Profile,RoadMap,RoadMapList,Skills,FavouriteExam
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
@@ -120,11 +120,24 @@ def home(request):
         )
     else:
         exams = Exam.objects.all()
-      
+
+    if request.user and request.method == 'POST' and 'favourite' in request.POST:
+        favourite = request.POST.get('favourite')
+        user = request.user
+        exam = Exam.objects.get(id=favourite)
+        favexam,create = FavouriteExam.objects.get_or_create(user=user,exam=exam)
+    
+        print("request received for adding in favourite",favourite)
+
+    favourite_exams = FavouriteExam.objects.filter(user=request.user).select_related('exam')
+    favourite_exams = [fav_exam.exam for fav_exam in favourite_exams]   
+
+
     return render(request, 'examapp/home.html', {
         'exams': exams,
         "roadmap":roadmap,
-        "recommended_exams":recommended
+        "recommended_exams":recommended,
+        "favourite_exams":favourite_exams
         })
 
 @login_required

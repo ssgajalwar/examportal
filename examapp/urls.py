@@ -22,7 +22,6 @@ urlpatterns = [
     path('roadmaps/',views.roadmaps,name='roadmaps'),
     path('roadmaps/<str:profile>/', views.roadmap_detail, name='roadmap_detail'),
 
-
     # Load Data
     path('loaddata/',views.loaddata,name='loaddata'),
     path('loadroadmap/',views.loadroadmap,name='loadroadmap'),

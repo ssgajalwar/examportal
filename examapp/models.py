@@ -105,3 +105,7 @@ class RoadMap(models.Model):
 
     def __str__(self):
         return str(self.roadmap)
+    
+class FavouriteExam(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)    
+    exam = models.ForeignKey(Exam,on_delete=models.CASCADE)
