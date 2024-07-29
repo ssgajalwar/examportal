@@ -286,7 +286,7 @@ def tech_news(request):
     # }
 
     
-    response = requests.get(url)
+    response = requests.get(url,timeout=5)
     news_data = response.json().get('articles', []) if response.status_code == 200 else []
 
     context = {
