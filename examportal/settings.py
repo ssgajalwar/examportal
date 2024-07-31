@@ -80,7 +80,7 @@ if Creds.DB == 'test':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join('/home/mca1415/ExamGEEK', 'db.sqlite3'),
+            'NAME': os.path.join('/home/mca1415/examportal', 'db.sqlite3'),
         }
     }
 
