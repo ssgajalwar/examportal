@@ -7,23 +7,24 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from .forms import ProfileForm, YouTubeVideoForm, OTPForm, PasswordResetForm, SetPasswordForm
 from django.http import HttpResponse
-from django.db import models  # Ensure models import from Django
 import json
-import requests
-from django.conf import settings
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.utils.crypto import get_random_string
-from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import update_session_auth_hash
 import pandas as pd
 import os
 import examapp
 import math
-from django.contrib.staticfiles import finders
 
+################################
+# Views For Rendering Pages
+################################
 
+# ==============================
+# Registration of User
+# ==============================
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -38,7 +39,9 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'examapp/register.html', {'form': form})
 
-
+# ==============================
+# Login of User
+# ==============================
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -51,7 +54,17 @@ def user_login(request):
             return render(request, 'examapp/login.html', {'error': 'Invalid username or password'})
     return render(request, 'examapp/login.html')
 
+# ==============================
+# Logout of User
+# ==============================
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('login')
 
+# ==============================
+# OTP and password Reset
+# ==============================
 @login_required
 def password_reset_request(request):
     if request.method == "POST":
@@ -75,7 +88,6 @@ def password_reset_request(request):
         form = PasswordResetForm()
     return render(request, 'examapp/password_reset.html', {'form': form})
 
-
 @login_required
 def otp_verification(request):
     if request.method == "POST":
@@ -91,7 +103,6 @@ def otp_verification(request):
     else:
         form = OTPForm()
     return render(request, 'examapp/otp_verification.html', {'form': form})
-
 
 @login_required
 def set_new_password(request):
@@ -112,6 +123,10 @@ def set_new_password(request):
     return render(request, 'examapp/set_new_password.html', {'form': form})
 
 
+
+# ==============================
+# Home View / All Exams Page
+# ==============================
 @login_required
 def home(request):
     if request.user:
@@ -150,7 +165,9 @@ def home(request):
         "favourite_exams": favourite_exams
     })
 
-
+# ==============================
+# Starting the Exam
+# ==============================
 @login_required
 def exam(request, exam_id):
     exam = get_object_or_404(Exam, pk=exam_id)
@@ -164,7 +181,9 @@ def exam(request, exam_id):
         'iterator': questions.__len__
     })
 
-
+# ==============================
+# Result Page
+# ==============================
 @login_required
 def result(request, exam_id):
     exam = get_object_or_404(Exam, pk=exam_id)
@@ -204,7 +223,9 @@ def result(request, exam_id):
     }
     return render(request, 'examapp/result.html', context)
 
-
+# ==============================
+# Dashboard Page
+# ==============================
 @login_required
 def dashboard(request):
     exams = UserExam.objects.filter(user=request.user)
@@ -233,13 +254,9 @@ def dashboard(request):
         'chart_data': json.dumps(chart_data),
     })
 
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect('login')
-
-
+# ==============================
+# Profile Page
+# ==============================
 @login_required
 def profile(request):
     user = request.user
@@ -264,7 +281,9 @@ def profile(request):
         "skillset": skill
     })
 
-
+# ==============================
+# Courses / Youtube Videos Page
+# ==============================
 @login_required
 def courses(request):
     videos = YouTubeVideo.objects.all()
@@ -275,7 +294,9 @@ def courses(request):
     }
     return render(request, 'examapp/courses.html', context)
 
-
+# ==============================
+# Adding a Youtube Video
+# ==============================
 @login_required
 def add_video(request):
     if request.method == 'POST':
@@ -287,18 +308,25 @@ def add_video(request):
         form = YouTubeVideoForm()
     return render(request, 'examapp/add_video.html', {'form': form})
 
-
+# ==============================
+# Marking Video as Watched
+# ==============================
 @login_required
 def mark_as_watched(request, video_id):
     video = YouTubeVideo.objects.get(id=video_id)
     WatchedVideo.objects.get_or_create(user=request.user, video=video)
     return redirect('courses')
 
+# ==============================
+# Settings Page
+# ==============================
 @login_required
 def settings(request):
     return render(request, 'examapp/settings.html')
 
-
+# ==============================
+# Roadmaps Page
+# ==============================
 @login_required
 def roadmaps(request):
     user = request.user
@@ -320,7 +348,9 @@ def roadmaps(request):
     }
     return render(request, 'examapp/roadmaps.html', context)
 
-
+# ==============================
+# Concepts Page
+# ==============================
 @login_required
 def concepts(request):
     skills = Skills.objects.all()
@@ -329,7 +359,9 @@ def concepts(request):
         'skills': skills
     })
 
-
+# ==============================
+# Concepts Details
+# ==============================
 @login_required
 def concepts_detail(request, skill):
     skill = Skills.objects.get(skill=skill)
@@ -339,7 +371,9 @@ def concepts_detail(request, skill):
         "skill": skill
     })
 
-
+# ==============================
+# Roadmap Details
+# ==============================
 @login_required
 def roadmap_detail(request, profile):
     profile_skills = RoadMapList.objects.get(roadmap_name=profile)
@@ -350,6 +384,10 @@ def roadmap_detail(request, profile):
     return render(request, 'examapp/roadmap_details.html', context)
 
 
+
+# ==============================
+# Views For Loading Data
+# ==============================
 def loaddata(request):
     csv_filepath = os.path.abspath(examapp.__path__[0])+'\q_css.csv'
     csv_data = pd.read_csv(csv_filepath)

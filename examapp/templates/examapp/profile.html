@@ -32,7 +32,7 @@
             <div class="card-wrapper">
                 <div class="row">
                     {% for user_exam in user_exams %}
-                    <div class="col-md-3">
+                    <div class="col-md-3 my-2">
                         <div class="card p-2">
                             <div class="card-body">
                                 <h3>{{ user_exam.exam.title.skill }}</h3>
@@ -54,9 +54,9 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h3>{{ user_exam }}</h3>
-                                <p class="text-nowrap">0%</p>
+                                <!-- <p class="text-nowrap">0%</p> -->
                             </div>
-                            <progress id="file" value="0" max="100"> 32% </progress>
+                            <!-- <progress id="file" value="0" max="100"> 32% </progress> -->
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('exam/<int:exam_id>/', views.exam, name='exam'),
-    # path('exam/<int:exam_id>/question/<int:question_id>/', views.question, name='question'),
     path('exam/<int:exam_id>/result/', views.result, name='result'),
     path('accounts/register/', views.register, name='register'),
     path('accounts/login/', views.user_login, name='login'),
@@ -24,8 +23,8 @@ urlpatterns = [
     path('roadmaps/<str:profile>/', views.roadmap_detail, name='roadmap_detail'),
 
     # Load Data
-    path('loaddata/',views.loaddata,name='loaddata'),
-    path('loadroadmap/',views.loadroadmap,name='loadroadmap'),
-    path('loadexam/',views.loadexam,name='loadexam'),
+    # path('loaddata/',views.loaddata,name='loaddata'),
+    # path('loadroadmap/',views.loadroadmap,name='loadroadmap'),
+    # path('loadexam/',views.loadexam,name='loadexam'),
 
 ]
