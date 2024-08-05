@@ -10,7 +10,13 @@ class Skills(models.Model):
 
     def __str__(self):
         return self.skill
-    
+
+class Concepts(models.Model):
+    skill = models.ForeignKey(Skills,on_delete=models.CASCADE)
+    concept = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.skill.skill}-{self.concept}"
 class Exam(models.Model):
     title = models.ForeignKey(Skills,on_delete=models.CASCADE)
     description = models.TextField(null=True)
@@ -105,3 +111,7 @@ class RoadMap(models.Model):
 
     def __str__(self):
         return str(self.roadmap)
+    
+class FavouriteExam(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)    
+    exam = models.ForeignKey(Exam,on_delete=models.CASCADE)

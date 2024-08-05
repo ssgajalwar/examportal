@@ -128,14 +128,14 @@
 - Returns : render(request,template,context)
 
 11.Mark as Watched
-- Path : 
-- Name : 
-- Method : 
+- Path : 'mark_as_watched/video_id'
+- Name : 'mark_as_watched'
+- Method : mark_as_wathced(request,video_id)
 - Parameters : 
 - Request : 
 - Template : 
 - Context :
-- Returns : 
+- Returns : redirect('courses') 
 
 12.Tech News
 - Path : 

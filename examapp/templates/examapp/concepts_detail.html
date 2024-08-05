@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'sidebar.html'%}
+    <div class="content">
+        <div class="container ">
+            <h2 class="text-center mb-4"> {{skill}} </h2>
+            <ul class="list-group">
+                {% for concept in concepts_data %}
+                <li class="list-group-item">{{ concept.concept }}</li>
+                {% endfor %}
+            </ul>
+            <div class="mt-3">
+                <a href="{% url 'concepts' %}" class="btn btn-theme-secondary">All Skills</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

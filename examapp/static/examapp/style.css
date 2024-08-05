@@ -100,7 +100,7 @@
         appearance: none;
         width: 250px;
         max-width: 100%;
-        height: 20px;
+        height: 10px;
     }
     progress[value]::-webkit-progress-bar {
         background-color: #eee;
@@ -151,7 +151,14 @@
     .user-profile {
         color: #fff; /* Secondary color */
     }
-
+    .border-none,
+    .border-none:focus{
+        border: none;
+    }
+    .outline-none,
+    .outline-none:focus{
+        outline: none;
+    }
     .sidebar {
         height: 100vh;
         width: 250px;
