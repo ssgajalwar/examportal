@@ -5,6 +5,9 @@
         color: #4b0082;
         /* background: white !important; */
     }
+    a{
+        text-decoration: none;
+    }
     .btn-theme{
         background: #7c51fe;
         border-radius: 25px;
@@ -368,4 +371,13 @@
     /* RoadMap Page */
     .roadmap .card-body{
         padding: 18px;
+    }
+    .fs-18{
+        font-size: 18px;
+    }
+    .fs-20{
+        font-size: 20px;
+    }
+    .grey-text{
+        color: #575757;
     }

@@ -1,0 +1,25 @@
+.nav-setting-icon:hover{
+    background-color: black ;
+    animation: settingRotate 1s infinite;
+    position: relative;
+    transition: all 1s;
+}
+@keyframes settingRotate{
+    0%{
+        transform: rotateX('45deg');
+        background-color: aquamarine;
+    }
+    50%{
+        transform: rotateX('45deg');
+        background-color: aqua;
+    }
+    75%{
+        transform: rotateX('45deg');
+        background-color: green;
+    }
+    100%{
+        transform: rotateX('45deg');
+        background-color: pink;
+    }
+}
+

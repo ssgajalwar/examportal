@@ -137,10 +137,11 @@ def home(request):
             skillset = RoadMapList.objects.get(roadmap_name=roadmap)
             recommended = skillset.skill.all()
 
-    if request.method == 'POST' and 'query' in request.POST:
-        query = request.POST.get('query')
+    if request.method == 'GET' and 'query' in request.GET:
+        query = request.GET.get('query')
+
         exams = Exam.objects.filter(
-            Q(title__icontains=query) | Q(description__icontains=query)
+            Q(title__skill__icontains=query) | Q(description__icontains=query)
         )
     else:
         exams = Exam.objects.all()
