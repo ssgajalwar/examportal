@@ -259,7 +259,7 @@ def dashboard(request):
 # Profile Page
 # ==============================
 @login_required
-def profile(request):
+def progress(request):
     user = request.user
     roadmap = RoadMap.objects.get(user=user)
     skill = []
@@ -275,7 +275,7 @@ def profile(request):
             return redirect('profile')
     else:
         form = ProfileForm(instance=user.profile)
-    return render(request, 'examapp/profile.html', {
+    return render(request, 'examapp/progress.html', {
         'form': form,
         'user_exams': user_exams,
         "roadmap": roadmap.roadmap,
