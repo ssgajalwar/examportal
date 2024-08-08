@@ -129,6 +129,9 @@ def set_new_password(request):
 # ==============================
 @login_required
 def home(request):
+    page = 1
+    total_exams = Exam.objects.all().count()
+    total_pages = total_exams // 12
     if request.user:
         roadmap, create = RoadMap.objects.get_or_create(user=request.user)
         roadmap.save()
@@ -144,7 +147,12 @@ def home(request):
             Q(title__skill__icontains=query) | Q(description__icontains=query)
         )
     else:
-        exams = Exam.objects.all()
+        if 'page' in request.GET:
+            page = int(request.GET.get('page'))*12
+            exams = Exam.objects.all()[page-12:page]
+        else:
+            exams = Exam.objects.all()[:12]
+
 
     if request.user and request.method == 'POST' and 'favourite' in request.POST:
         favourite = request.POST.get('favourite')
@@ -159,11 +167,18 @@ def home(request):
         user=request.user).select_related('exam')
     favourite_exams = [fav_exam.exam for fav_exam in favourite_exams]
 
+ 
+  
     return render(request, 'examapp/home.html', {
         'exams': exams,
         "roadmap": roadmap,
         "recommended_exams": recommended,
-        "favourite_exams": favourite_exams
+        "favourite_exams": favourite_exams,
+        "page":page//12,
+        "prev_page":int(page//12) - 1,
+        "next_page":int(page//12) + 1,
+        "total_pages":range(1,total_pages),
+        "total_pages_count":total_pages
     })
 
 # ==============================

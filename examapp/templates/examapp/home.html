@@ -165,9 +165,40 @@
                 {% endfor %}
             </div>
         </div>
+
+        <div class="custom-pagination mt-2 d-flex justify-content-end px-3">
+            <nav aria-label="...">
+                <ul class="pagination pagination-md">
+                    <li class="page-item" aria-current="page">
+                        <span class="page-link"><a class="pg-element pg-element-{{i}}" href="{% url 'home' %}?page=1">First</a></span>
+                    </li>
+                    {% for i in total_pages %}
+                    <li 
+                    class="page-item 
+                    {% if i == page %} active {% endif %}
+                    {% if i == next_page or i == prev_page  or i == page %} d-block {% else %} d-none {% endif %}
+                    " aria-current="page">
+                        <span class="page-link"><a class="pg-element pg-element-{{i}}" href="{% url 'home' %}?page={{ i }}">{{ i }}</a></span>
+                    </li>
+                    {% endfor %}
+                    <li class="page-item" aria-current="page">
+                        <span class="page-link"><a class="pg-element pg-element-{{i}}" href="{% url 'home' %}?page={{total_pages_count}}">Last</a></span>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
     </div>
+
+
     <script>
-        
+        // page = "{{page}}"
+        // $(`.pg-element`).removeClass('bg-danger')
+        // $(`.pg-element`).addClass('d-none')
+        // $(`.pg-element-${page - 1}`).removeClass('d-none')
+        // $(`.pg-element-${page}`).removeClass('d-none')
+        // $(`.pg-element-${page + 1}`).removeClass('d-none')
+        // $(`.pg-element-{{page}}`).addClass('bg-danger')
         
         var icons = {
             html:`devicon-html5-plain-wordmark`,
