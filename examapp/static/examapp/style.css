@@ -212,10 +212,10 @@
     }
     .sidebar.show-sidebar{
         position: fixed;
-        height: 100%;
-        width: 70%;
+        /* height: 100%; */
+        width: 90%;
         z-index: 5;
-        display: block !important;
+        display: flex !important;
         transform: translateX(0%) ;
     }
 
