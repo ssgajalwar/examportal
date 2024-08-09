@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = Creds.SECRET_KEY
 DEBUG = Creds.DEBUG
 
-ALLOWED_HOSTS = ['*','shreenath.pythonanywhere.com','examgeek.herokuapp.com', 'localhost','mca1415.pythonanywhere.com']
+ALLOWED_HOSTS = Creds.ALLOWEDHOST
 
 
 # Application definition

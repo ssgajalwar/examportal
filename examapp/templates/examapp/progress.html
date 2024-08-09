@@ -17,18 +17,8 @@
     </style>
 
     <div class="content">
-        <h2>Profile</h2>
-        <div class="profile-info">
-            <div id="profile-text">
-                <p><strong>Username:</strong> {{ user.username }}</p>
-                <p><strong>Email:</strong> {{ user.email }}</p>
-                <!-- Add other profile fields as needed -->
-            </div>
-
-        </div>
         <div class="p-2">
-            <h3 class="mt-5">Exam Attempts</h3>
-
+            <h3 class="">Exam Attempts</h3>
             <div class="card-wrapper">
                 <div class="row">
                     {% for user_exam in user_exams %}

@@ -2,7 +2,7 @@
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #e1e1e1; 
-        color: #4b0082;
+        color: #575757;
         /* background: white !important; */
     }
     a{
@@ -163,18 +163,20 @@
         outline: none;
     }
     .sidebar {
-        height: 100vh;
+        height: calc(100vh - 90px);
         width: 250px;
         position: fixed;
         background-color: #fff;
         padding: 5px 10px;
-        color: #4b0082;
+        color: #575757;
         border-radius: 25px;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         transition: all 0.5s;
         z-index: 5;
     }
-    .sidebar a {
+    .sidebar .side-link a {
         padding: 15px 20px;
         text-decoration: none;
         font-size: 18px;
@@ -190,12 +192,12 @@
         margin: 4px 0px;
         cursor: pointer;
     }
-    .sidebar a.active{
+    .sidebar .side-link a.active{
         background-color: #7c51fe;
         color: #fff;
         font-weight: 600;
     }
-    .sidebar a:hover {
+    .sidebar .side-link a:hover {
         background-color: #7c51fe94;
         color: #fff;
         font-weight: 600;
@@ -210,13 +212,78 @@
     }
     .sidebar.show-sidebar{
         position: fixed;
-        height: 100%;
-        width: 70%;
+        /* height: 100%; */
+        width: 90%;
         z-index: 5;
-        display: block !important;
+        display: flex !important;
         transform: translateX(0%) ;
     }
 
+    .sidebar-logout,
+    .sidebar-profile{
+        display: flex;
+        /* justify-content: space-between; */
+        gap: 10px;
+    }
+    .sidebar-profile-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        width: 3rem;
+        background-color: #7c51fe;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 50%;
+    }
+    .sidebar-profile-icon a{
+        color: #ffffff;
+        cursor: pointer;
+    }
+    .sidebar-profile-content{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .sidebar-profile-name{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .sidebar-profile-email{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 10px;
+    }
+    .pagination .page-item .page-link{
+        color: #ffffff;
+        border: none;
+        outline: none;
+        transition: all 0.5s ease-in-out;
+        border-radius: 10px;
+    }
+    .pagination .page-item.active .page-link{
+        background: #7c51fe;
+        
+    }
+    .pagination .page-item.active .page-link a{
+        color: #ffffff;
+
+    }
+    .pagination .page-item .page-link a{
+        cursor: pointer;
+        color: #7c51fe;
+        text-decoration: none;
+    }
+    .pagination .page-item .page-link{
+        border: none;
+    }
+    .pagination .page-item:hover,
+    .pagination .page-item{
+        margin: 3px;
+        text-decoration: none;
+        background-color: #ffffff;
+    }
     @media (max-width: 767.98px) {
         .sidebar {
             /* display: none; */
