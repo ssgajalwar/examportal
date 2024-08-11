@@ -13,11 +13,13 @@
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <iframe  width="100%" height="auto" src="https://www.youtube.com/embed/kUMe1FH4CHE" title="Learn HTML – Full Tutorial for Beginners (2022)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="frwrap-id-{{forloop.counter}} frid">
+
+                        </div>
                         <h5 class="card-title">{{ video.title }}</h5>
                         <p class="card-text">{{ video.description }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ video.url }}"  target="_blank" data-url="{{ video.url }}" class="btn video-url btn-theme">Watch</a>
+                            <a href="{{ video.url }}" data-id="id-{{forloop.counter}}" target="_blank" data-url="{{ video.url }}" class="btn video-url btn-theme">Watch</a>
                             <form action="{% url 'mark_as_watched' video.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-theme-secondary"> Watched</button>
@@ -25,7 +27,7 @@
                         </div>
                         </div>
                     </div>
-                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -33,9 +35,12 @@
 </div>
 
 <script>
-    $(".video-url").each(function(){
+    $(".video-url").each(function(index){
         let url_id = $(this).attr("data-url").split('v=')[1].split('&')[0]
-        console.log($(this).closest("iframe").attr('src',url_id))
+        let data_id = $(this).attr("data-id")
+        $(`.frwrap-${data_id}`).append(`
+            <iframe  width="100%"  height="auto" src="https://www.youtube.com/embed/${url_id}" title="Learn HTML – Full Tutorial for Beginners (2022)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        `)
     })
 </script>
 {% endblock %}
