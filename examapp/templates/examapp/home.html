@@ -175,6 +175,7 @@
                     {% for i in total_pages %}
                     <li 
                     class="page-item 
+                    {% if i == 1 %} active {% endif %}
                     {% if i == page %} active {% endif %}
                     {% if i == next_page or i == prev_page  or i == page %} d-block {% else %} d-none {% endif %}
                     " aria-current="page">
