@@ -3,92 +3,20 @@
 {% load custom_filters %}
 {% block title %}Exam GEEK - Home Page{% endblock %}
 {% block content %}
-    <style>
-        body {
-            background-color: #f5f5f5;
-            color: #4b0082;
-        }
- 
-
-        .card {
-            width: 300px;
-            height: 300px;
-            box-shadow: 1px 3px 20px 4px rgba(0, 0, 0, 0.2);
-            border: none;
-            border-radius: 30px;
-            margin: 5px 0px;
-        }
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            /* align-items: center; */
-            justify-content: space-between;
-            background-color: white;
-            border-radius: 30px;
-            padding: 10px;
-        }
-        .card-title {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .card-text {
-            font-size: 14px;
-            color: #777;
-        }
-        .purple-title{
-            background: #7c51fe;
-            color: #fff;
-            width: 100%;
-            height: 60%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border-radius: 25px;
-        }
-        .purple-title i{
-            font-size: 55px;
-        }
-        .card-content{
-            height: 40%;
-            padding: 15px 5px 0px 5px;
-        }
-        .bookmark{
-            display: flex;
-            height: 40px;
-            width: 40px;
-            font-size: 22px;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 106, 213, 0.2);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(9.9px);
-            -webkit-backdrop-filter: blur(9.9px);
-            border: 1px solid rgba(255, 106, 215, 0.21);
-            border-radius: 50%;
-            cursor: pointer;
-            color: #fe51b6;
-        }
-    </style>
-
-
     {% include 'sidebar.html' %}
     <div class="content">
         <div class="p-1">
-            <div class="mb-3">
-                <button class="btn-theme-tab tab-btn all-btn active" onclick="changeHomeContainer('all')">All</button>
+            <div class="mb-3 d-flex gap-2" >
+                <button class="btn-theme-tab btn tab-btn all-btn active" onclick="changeHomeContainer('all')">All</button>
                 {% if roadmap %}
-                <button class="btn-theme-tab tab-btn roadmap-btn" onclick="changeHomeContainer('roadmap')">{{roadmap}}</button>
+                <button class="btn-theme-tab btn tab-btn roadmap-btn" onclick="changeHomeContainer('roadmap')">{{roadmap}}</button>
                 {% endif %}
-                <button class="btn-theme-tab tab-btn favourite-btn" onclick="changeHomeContainer('favourite')">Favourite</button>
+                <button class="btn-theme-tab btn tab-btn favourite-btn" onclick="changeHomeContainer('favourite')">Favourite</button>
             </div>
             <div class="row all-container ">
                 {% for exam in exams %}
                 <div class="col-md-3 d-flex justify-content-center">
-                    <div class="card ">
+                    <div class="card exam-card">
                         <div class="card-body">
                             <div class="purple-title">
                                 <i data-icon="{{ exam.title.skill|removespaces|lower}}" class="exam-icon "></i>
@@ -118,7 +46,7 @@
             <div class="row roadmap-container d-none">                
                 {% for exam in recommended_exams %}
                 <div class="col-md-3 d-flex justify-content-center">
-                    <div class="card ">
+                    <div class="card exam-card">
                         <div class="card-body">
                             <div class="purple-title">
                                 <i data-icon="{{ exam.skill|removespaces|lower}}" class="exam-icon "></i>
@@ -142,7 +70,7 @@
             <div class="row favourite-container d-none">
                 {% for exam in favourite_exams %}
                 <div class="col-md-3 d-flex justify-content-center">
-                    <div class="card ">
+                    <div class="card exam-card">
                         <div class="card-body">
                             <div class="purple-title">
                                 <i data-icon="{{ exam.skill|removespaces|lower}}" class="exam-icon "></i>

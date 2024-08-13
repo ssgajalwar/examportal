@@ -13,8 +13,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ profile.roadmap_name }}</h5>
                         <div class="d-flex gap-2 justify-content-between ">
-                            <a href="{% url 'roadmap_detail' profile.roadmap_name %}" class="btn btn-theme">View Skills</a>
-                            <button  class="btn btn-theme-secondary start-roadmap" data-roadmap="{{profile.roadmap_name}}">Start Roamap</button>
+                            <a href="{% url 'roadmap_detail' profile.roadmap_name %}" class="btn btn-theme">View</a>
+                            <button  class="btn btn-theme-secondary start-roadmap" data-roadmap="{{profile.roadmap_name}}">Start</button>
                         </div>
                     </div>
                 </div>
@@ -25,9 +25,7 @@
 </div>
 <script>
 
-    function abc(){
-        
-    }
+
     
     $(".start-roadmap").click(function(){
         $.ajax({
