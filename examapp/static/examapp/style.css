@@ -50,12 +50,14 @@
     }
     .btn-theme-tab{
         background: var(--inactive-tab);
-        border-radius: 25px;
-        padding: 7px 30px;
+        border-radius: 12px;
+        padding: 4px 15px;
+        margin: 0px 2px;
         border: none;
         outline: none;
         text-decoration: none;
         color: var(--white);
+        font-size: 14px;
     }
     .btn-theme-tab.active{
         background: var(--secondary);
