@@ -38,7 +38,7 @@
         sessionStorage.setItem("active_class",$(this).attr("data-id"))
         $(`.${sessionStorage.getItem("active_class")}`).addClass('active')
     })
-    if(sessionStorage.getItem("active_class") == null || sessionStorage.getItem("active_class") == ""){
+    if(sessionStorage.getItem("active_class") == null || sessionStorage.getItem("active_class") == "undefined" || sessionStorage.getItem("active_class") == undefined){
         $(".home").addClass('active')
     }else{
         $(`.${sessionStorage.getItem("active_class")}`).addClass('active')
