@@ -1,33 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
     <style>
-        body {
-            background-color: #f5f5f5;
-            color: #4b0082;
-        }
-        .result-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 25px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        .result-item {
-            margin: 10px 0;
-        }
 
-        .home-btn:hover {
-            background-color: #37006b;
-            color: white;
-        }
-        .award-wrapper{
-            font-size: 70px;
-            margin-bottom: 14px;
-
-            color: #ffd21c;
-        }
+        
     </style>
 
     <div class="result-container">
@@ -48,6 +23,16 @@
             <p class="result-item col-6 text-danger">Wrong: <strong>{{ wrong_answers}}</strong></p>
         </div>
     </div>
-    <a href="{% url 'home' %}" class="btn-theme">Go to Home</a>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'home' %}" class="btn-theme">Go to Home</a>
+    </div>
+
+    <div class="card text-start feedback-card p-2">
+        <div class="card-body px-2">
+            <p class="card-text"> Help us Improve Examgeek </i></p>
+            <p class="d-flex"> <i class="fa-solid fa-thumbs-up fs-2"></i> <i class="fa-solid fa-thumbs-down mx-4"></i></p>
+        </div>
+    </div>
+    
 
 {% endblock %}

@@ -9,3 +9,4 @@ function glass_notify(message,icon="",color,bg_color){
         $("body").remove(".box-wrapper","")
     },6000)       
 }
+

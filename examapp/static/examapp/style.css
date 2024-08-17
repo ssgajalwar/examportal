@@ -524,3 +524,40 @@
         cursor: pointer;
         color: var(--bookmark);
     }
+
+    .result-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    .result-item {
+        margin: 10px 0;
+    }
+
+    .home-btn:hover {
+        background-color: #37006b;
+        color: white;
+    }
+    .award-wrapper{
+        font-size: 70px;
+        margin-bottom: 14px;
+
+        color: #ffd21c;
+    }
+    .feedback-card{
+        position: fixed;
+        bottom: 2rem;
+        right: 1rem;
+    }
+    .feedback-card i{
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.5s;
+    }
+    .feedback-card i:hover{
+        color: var(--bg-tab-hover);
+    }
