@@ -49,7 +49,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('roadmaps')
+            return redirect('home')
         else:
             return render(request, 'examapp/login.html', {'error': 'Invalid username or password'})
     return render(request, 'examapp/login.html')

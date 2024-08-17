@@ -1,4 +1,4 @@
-<div class="sidebar">
+<sidebar class="sidebar">
    <div class="d-flex flex-column side-link">
        <a class="home " data-id="home" href="{% url 'home'%}"><i class="fa-solid fa-house"></i> <span>Home</span></a>
        <a class="news " data-id="news" href="{% url 'concepts' %}"><i class="fa-solid fa-newspaper"></i><span>Concepts</span></a>
@@ -26,12 +26,8 @@
             </div>            
         </div>
    </div>
-</div>
-<style>
+</sidebar>
 
-
-
-</style>
 <script>
     $("a").on('click',function(){
         $("a").removeClass('active')
