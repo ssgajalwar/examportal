@@ -469,6 +469,11 @@
     }
     .card.exam-card{
         height: 300px;
+        cursor: pointer;
+        transition: all 0.5s;
+    }
+    .card.exam-card:hover{
+        scale: 1.03;
     }
     .card-body {
         display: flex;

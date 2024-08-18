@@ -204,12 +204,17 @@ def exam(request, exam_id):
 def result(request, exam_id):
     exam = get_object_or_404(Exam, pk=exam_id)
     submitted_answers = request.POST
+    # print(submitted_answers)
     total_questions = 0
     correct_answers = 0
     questions = Question.objects.filter(exam_id=exam_id).values('id', 'answer')
+
     for question in questions:
         question_id = "choice-" + str(question['id'])
         correct_answer = question['answer']
+        print(question['id'],"=====")
+        rsp_qid=Question.objects.get(id=question['id'])
+        user_response,user_response_created = UserResponse.objects.get_or_create(user=request.user,question=rsp_qid,selected_choice=1,is_correct=False,exam_id=exam)
         if question_id in submitted_answers:
             submitted_answer = submitted_answers[question_id]
             if str(correct_answer) == submitted_answer:
@@ -238,6 +243,16 @@ def result(request, exam_id):
         'score': score,
     }
     return render(request, 'examapp/result.html', context)
+
+# ==============================
+# Detailed Result Page
+# ==============================
+@login_required
+def detailed_result(request,exam_id):
+    user_exam = UserResponse.objects.filter(exam_id=exam_id)
+    # print(user_exam)
+    return render(request,'examapp/detailed_result.html')
+
 
 # ==============================
 # Dashboard Page

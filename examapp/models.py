@@ -48,8 +48,9 @@ class Choice(models.Model):
 class UserResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    selected_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    selected_choice = models.IntegerField()
     is_correct = models.BooleanField()
+    exam_id = models.ForeignKey(Exam,on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.user.username} - {self.question.question_title}"
