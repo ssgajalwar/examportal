@@ -214,11 +214,13 @@ def result(request, exam_id):
         correct_answer = question['answer']
         print(question['id'],"=====")
         rsp_qid=Question.objects.get(id=question['id'])
-        user_response,user_response_created = UserResponse.objects.get_or_create(user=request.user,question=rsp_qid,selected_choice=1,is_correct=False,exam_id=exam)
+        is_correct = False
         if question_id in submitted_answers:
             submitted_answer = submitted_answers[question_id]
             if str(correct_answer) == submitted_answer:
                 correct_answers += 1
+                is_correct = True
+            user_response,user_response_created = UserResponse.objects.get_or_create(user=request.user,question=rsp_qid,selected_choice=submitted_answer,is_correct=is_correct,exam_id=exam)
         total_questions += 1
     score = correct_answers * 4
 
@@ -251,7 +253,10 @@ def result(request, exam_id):
 def detailed_result(request,exam_id):
     user_exam = UserResponse.objects.filter(exam_id=exam_id)
     # print(user_exam)
-    return render(request,'examapp/detailed_result.html')
+    context = {
+        'exam':user_exam
+    }
+    return render(request,'examapp/detailed_result.html',context)
 
 
 # ==============================

@@ -2,5 +2,13 @@
 
 {% block content %}
 {% include 'sidebar.html'%}
-Hello
+<div class="content">
+    {% for i in exam %}
+     <ul>
+         <li>{{i.question}}</li>
+         <li>{{i.selected_choice}}</li>
+         <li>{{i.is_correct}}</li>
+     </ul>
+    {% endfor %}
+</div>
 {% endblock content %}
