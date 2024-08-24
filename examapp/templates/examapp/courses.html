@@ -19,10 +19,10 @@
                         <h5 class="card-title">{{ video.title }}</h5>
                         <p class="card-text">{{ video.description }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ video.url }}" data-id="id-{{forloop.counter}}" target="_blank" data-url="{{ video.url }}" class="btn video-url btn-theme">Watch</a>
+                            <a href="{{ video.url }}" data-id="id-{{forloop.counter}}" target="_blank" data-url="{{ video.url }}" class="btn video-url btn-theme" title="Watch Video">Watch</a>
                             <form action="{% url 'mark_as_watched' video.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-theme-secondary"> Watched</button>
+                                <button type="submit" class="btn btn-theme-secondary" title="Mark as wathced"> Watched</button>
                             </form>
                         </div>
                         </div>

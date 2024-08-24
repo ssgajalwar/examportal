@@ -7,11 +7,11 @@
     <div class="content">
         <div class="p-1">
             <div class="mb-3 d-flex gap-2" >
-                <button class="btn-theme-tab  tab-btn all-btn active" onclick="changeHomeContainer('all')">All</button>
+                <button class="btn-theme-tab  tab-btn all-btn active" title="All Exams" onclick="changeHomeContainer('all')">All</button>
                 {% if roadmap %}
-                <button class="btn-theme-tab  tab-btn roadmap-btn" onclick="changeHomeContainer('roadmap')">{{roadmap}}</button>
+                <button class="btn-theme-tab  tab-btn roadmap-btn" title="Examps for {{roadmap}}" onclick="changeHomeContainer('roadmap')">{{roadmap}}</button>
                 {% endif %}
-                <button class="btn-theme-tab  tab-btn favourite-btn" onclick="changeHomeContainer('favourite')">Favourite</button>
+                <button class="btn-theme-tab  tab-btn favourite-btn" title="Favourite Exams" onclick="changeHomeContainer('favourite')">Favourite</button>
             </div>
             <div class="row all-container ">
                 {% for exam in exams %}

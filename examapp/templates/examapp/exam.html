@@ -48,16 +48,16 @@
                         </div>
                     {% endfor %}
                     <div class="d-flex justify-content-center gap-3">
-                        <button type="button" class="prev-btn btn-theme mx-2">Previous</button>
-                        <button type="button" class="next-btn btn-theme mx-2">Next</button>
-                        <input type="submit" value="Submit" class="submit-btn mx-2 btn-theme bg-success">
+                        <button type="button" class="prev-btn btn-theme mx-2" title="Previous Question">Previous</button>
+                        <button type="button" class="next-btn btn-theme mx-2" title="Next Question">Next</button>
+                        <input type="submit" value="Submit" title="Submit Exam" class="submit-btn mx-2 btn-theme bg-success">
                     </div>
                 </form>
             </div>
             <div class="col-md-3 col-sm-12">
                 <div class="question-box">
                     {% for i in questions %}
-                        <div class="question-number" id="qn-{{ forloop.counter }}">{{ forloop.counter }}</div>
+                        <div class="question-number" id="qn-{{ forloop.counter }}" title="Question No : {{forloop.counter}}">{{ forloop.counter }}</div>
                     {% endfor %}
                 </div>
             </div>
